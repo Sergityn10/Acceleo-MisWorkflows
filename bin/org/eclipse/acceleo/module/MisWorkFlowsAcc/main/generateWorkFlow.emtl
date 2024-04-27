@@ -2,7 +2,7 @@
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:mtl="http://www.eclipse.org/acceleo/mtl/3.0" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore">
   <mtl:Module name="generateWorkFlow" nsURI="org::eclipse::acceleo::module::MisWorkFlowsAcc::main::generateWorkFlow" startHeaderPosition="91" endHeaderPosition="242">
     <documentation xsi:type="mtl:ModuleDocumentation">
-      <body startPosition="32" endPosition="88" value="&#xD;&#xA;The documentation of the module generateWorkFlow.&#xD;&#xA;&#xD;&#xA;"/>
+      <body startPosition="32" endPosition="88" value="&#xA;The documentation of the module generateWorkFlow.&#xA;&#xA;"/>
     </documentation>
     <input>
       <takesTypesFrom href="http://www.example.org/proyectoWorkflow#/"/>
@@ -176,7 +176,7 @@
       </body>
       <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
       <documentation xsi:type="mtl:ModuleElementDocumentation">
-        <body startPosition="165" endPosition="242" value="&#xD;&#xA;The documentation of the template generateElement.&#xD;&#xA;@param aWorkflow&#xD;&#xA;&#xD;&#xA;"/>
+        <body startPosition="165" endPosition="242" value="&#xA;The documentation of the template generateElement.&#xA;@param aWorkflow&#xA;&#xA;"/>
         <parametersDocumentation name="aWorkflow">
           <body value=""/>
         </parametersDocumentation>
@@ -1400,6 +1400,250 @@
         <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//TConsultaBD"/>
       </parameter>
     </ownedModuleElement>
+    <ownedModuleElement xsi:type="mtl:Template" name="generateSQLScript" visibility="Public" main="true">
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
+      <body xsi:type="mtl:FileBlock" openMode="OverWrite">
+        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
+        <body xsi:type="mtl:ForBlock">
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="CREATE TABLE "/>
+          <body xsi:type="ocl.ecore:PropertyCallExp">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <source xsi:type="ocl.ecore:VariableExp" name="aTabla" referredVariable="/0/generateSQLScript/%.1/%.1/aTabla">
+              <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tabla"/>
+            </source>
+            <referredProperty xsi:type="ecore:EAttribute" href="http://www.example.org/proyectoWorkflow#//Tabla/nombreTabla"/>
+          </body>
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" (&#xA;&#x9;"/>
+          <body xsi:type="ocl.ecore:PropertyCallExp">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <source xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Identificador"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="aTabla" referredVariable="/0/generateSQLScript/%.1/%.1/aTabla">
+                <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tabla"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="http://www.example.org/proyectoWorkflow#//Tabla/identificador"/>
+            </source>
+            <referredProperty xsi:type="ecore:EAttribute" href="http://www.example.org/proyectoWorkflow#//Identificador/nombreId"/>
+          </body>
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" INTEGER PRIMARY KEY,&#xA;"/>
+          <body xsi:type="mtl:ForBlock">
+            <body xsi:type="mtl:IfBlock">
+              <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="        "/>
+              <body xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="attr" referredVariable="/0/generateSQLScript/%.1/%.1/%.5/attr">
+                  <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+                </source>
+                <referredProperty xsi:type="ecore:EAttribute" href="http://www.example.org/proyectoWorkflow#//Atributo/nombreAtributo"/>
+              </body>
+              <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" BOOLEAN NOT NULL,&#xA;"/>
+              <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="attr" referredVariable="/0/generateSQLScript/%.1/%.1/%.5/attr">
+                  <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+                </source>
+                <argument xsi:type="ocl.ecore:TypeExp" eType="/34/Boolean">
+                  <referredType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Boolean"/>
+                </argument>
+                <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsTypeOf"/>
+              </ifExpr>
+            </body>
+            <body xsi:type="mtl:IfBlock">
+              <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="        "/>
+              <body xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="attr" referredVariable="/0/generateSQLScript/%.1/%.1/%.5/attr">
+                  <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+                </source>
+                <referredProperty xsi:type="ecore:EAttribute" href="http://www.example.org/proyectoWorkflow#//Atributo/nombreAtributo"/>
+              </body>
+              <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" FLOAT NOT NULL,&#xA;"/>
+              <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="attr" referredVariable="/0/generateSQLScript/%.1/%.1/%.5/attr">
+                  <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+                </source>
+                <argument xsi:type="ocl.ecore:TypeExp" eType="/34/Float">
+                  <referredType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Float"/>
+                </argument>
+                <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsTypeOf"/>
+              </ifExpr>
+            </body>
+            <body xsi:type="mtl:IfBlock">
+              <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="        "/>
+              <body xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="attr" referredVariable="/0/generateSQLScript/%.1/%.1/%.5/attr">
+                  <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+                </source>
+                <referredProperty xsi:type="ecore:EAttribute" href="http://www.example.org/proyectoWorkflow#//Atributo/nombreAtributo"/>
+              </body>
+              <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" INTEGER NOT NULL,&#xA;"/>
+              <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="attr" referredVariable="/0/generateSQLScript/%.1/%.1/%.5/attr">
+                  <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+                </source>
+                <argument xsi:type="ocl.ecore:TypeExp" eType="/34/Integer">
+                  <referredType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Integer"/>
+                </argument>
+                <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsTypeOf"/>
+              </ifExpr>
+            </body>
+            <body xsi:type="mtl:IfBlock">
+              <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="        "/>
+              <body xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="attr" referredVariable="/0/generateSQLScript/%.1/%.1/%.5/attr">
+                  <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+                </source>
+                <referredProperty xsi:type="ecore:EAttribute" href="http://www.example.org/proyectoWorkflow#//Atributo/nombreAtributo"/>
+              </body>
+              <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" VARCHAR(255) NOT NULL,&#xA;"/>
+              <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="attr" referredVariable="/0/generateSQLScript/%.1/%.1/%.5/attr">
+                  <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+                </source>
+                <argument xsi:type="ocl.ecore:TypeExp" eType="/34/String">
+                  <referredType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//String"/>
+                </argument>
+                <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsTypeOf"/>
+              </ifExpr>
+            </body>
+            <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
+            <body xsi:type="mtl:IfBlock">
+              <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="        "/>
+              <body xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="attr" referredVariable="/0/generateSQLScript/%.1/%.1/%.5/attr">
+                  <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+                </source>
+                <referredProperty xsi:type="ecore:EAttribute" href="http://www.example.org/proyectoWorkflow#//Atributo/nombreAtributo"/>
+              </body>
+              <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" DATE NOT NULL,&#xA;"/>
+              <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="attr" referredVariable="/0/generateSQLScript/%.1/%.1/%.5/attr">
+                  <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+                </source>
+                <argument xsi:type="ocl.ecore:TypeExp" eType="/34/Date">
+                  <referredType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Date"/>
+                </argument>
+                <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsTypeOf"/>
+              </ifExpr>
+            </body>
+            <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
+            <loopVariable name="attr">
+              <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+            </loopVariable>
+            <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/6/OrderedSet(Atributo)">
+              <source xsi:type="ocl.ecore:VariableExp" name="aTabla" referredVariable="/0/generateSQLScript/%.1/%.1/aTabla">
+                <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tabla"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="http://www.example.org/proyectoWorkflow#//Tabla/atributo"/>
+            </iterSet>
+          </body>
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;"/>
+          <body xsi:type="mtl:ForBlock">
+            <body xsi:type="mtl:IfBlock">
+              <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="        , FOREIGN KEY ("/>
+              <body xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <source xsi:type="ocl.ecore:OperationCallExp">
+                  <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//ForeignKey"/>
+                  <source xsi:type="ocl.ecore:VariableExp" name="attr" referredVariable="/0/generateSQLScript/%.1/%.1/%.7/attr">
+                    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+                  </source>
+                  <argument xsi:type="ocl.ecore:TypeExp" eType="/34/ForeignKey">
+                    <referredType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//ForeignKey"/>
+                  </argument>
+                  <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclAsType"/>
+                </source>
+                <referredProperty xsi:type="ecore:EAttribute" href="http://www.example.org/proyectoWorkflow#//Atributo/nombreAtributo"/>
+              </body>
+              <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=") REFERENCES "/>
+              <body xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <source xsi:type="ocl.ecore:OperationCallExp">
+                  <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tabla"/>
+                  <source xsi:type="ocl.ecore:OperationCallExp">
+                    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+                    <source xsi:type="ocl.ecore:VariableExp" name="attr" referredVariable="/0/generateSQLScript/%.1/%.1/%.7/attr">
+                      <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+                    </source>
+                    <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/emf/2002/Ecore#//EObject/eContainer"/>
+                  </source>
+                  <argument xsi:type="ocl.ecore:TypeExp" eType="/34/Tabla">
+                    <referredType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tabla"/>
+                  </argument>
+                  <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclAsType"/>
+                </source>
+                <referredProperty xsi:type="ecore:EAttribute" href="http://www.example.org/proyectoWorkflow#//Tabla/nombreTabla"/>
+              </body>
+              <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="("/>
+              <body xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="attr" referredVariable="/0/generateSQLScript/%.1/%.1/%.7/attr">
+                  <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+                </source>
+                <referredProperty xsi:type="ecore:EAttribute" href="http://www.example.org/proyectoWorkflow#//Atributo/nombreAtributo"/>
+              </body>
+              <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=")&#xA;"/>
+              <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="attr" referredVariable="/0/generateSQLScript/%.1/%.1/%.7/attr">
+                  <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+                </source>
+                <argument xsi:type="ocl.ecore:TypeExp" eType="/34/ForeignKey">
+                  <referredType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//ForeignKey"/>
+                </argument>
+                <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsTypeOf"/>
+              </ifExpr>
+            </body>
+            <loopVariable name="attr">
+              <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+            </loopVariable>
+            <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/6/OrderedSet(Atributo)">
+              <source xsi:type="ocl.ecore:VariableExp" name="aTabla" referredVariable="/0/generateSQLScript/%.1/%.1/aTabla">
+                <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tabla"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="http://www.example.org/proyectoWorkflow#//Tabla/atributo"/>
+            </iterSet>
+          </body>
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=");&#xA;"/>
+          <loopVariable name="aTabla">
+            <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tabla"/>
+          </loopVariable>
+          <iterSet xsi:type="ocl.ecore:IteratorExp" name="collect" eType="/6/Sequence(Tabla)">
+            <source xsi:type="ocl.ecore:PropertyCallExp" eType="/6/OrderedSet(BaseDatos)">
+              <source xsi:type="ocl.ecore:VariableExp" name="aWorkflow" referredVariable="/0/generateSQLScript/aWorkflow">
+                <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Workflow"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="http://www.example.org/proyectoWorkflow#//Workflow/basedatos"/>
+            </source>
+            <body xsi:type="ocl.ecore:PropertyCallExp" eType="/6/OrderedSet(Tabla)">
+              <source xsi:type="ocl.ecore:VariableExp" name="temp1" referredVariable="/0/generateSQLScript/%.1/%.1/collect/temp1">
+                <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//BaseDatos"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="http://www.example.org/proyectoWorkflow#//BaseDatos/tabla"/>
+            </body>
+            <iterator xsi:type="ocl.ecore:Variable" name="temp1">
+              <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//BaseDatos"/>
+            </iterator>
+          </iterSet>
+        </body>
+        <fileUrl xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="sqlScript.sql">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        </fileUrl>
+        <charset xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="UTF-8">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        </charset>
+      </body>
+      <parameter name="aWorkflow">
+        <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Workflow"/>
+      </parameter>
+    </ownedModuleElement>
   </mtl:Module>
   <ecore:EPackage name="additions">
     <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_String_Class">
@@ -1518,6 +1762,16 @@
           <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//TConsultaBD"/>
         </eParameters>
       </eOperations>
+      <eOperations name="generateSQLScript">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL" references="/0/generateSQLScript"/>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="aWorkflow">
+          <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Workflow"/>
+        </eParameters>
+      </eOperations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_OclAny_Class">
       <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
@@ -1596,6 +1850,15 @@
     </eClassifiers>
     <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(Atributo)" instanceClassName="java.util.LinkedHashSet">
       <elementType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(BaseDatos)" instanceClassName="java.util.LinkedHashSet">
+      <elementType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//BaseDatos"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(Tabla)" instanceClassName="java.util.LinkedHashSet">
+      <elementType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tabla"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:SequenceType" name="Sequence(Tabla)" instanceClassName="java.util.List">
+      <elementType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tabla"/>
     </eClassifiers>
   </ecore:EPackage>
   <ocl.ecore:Variable name="self">
@@ -1701,6 +1964,12 @@
     <eClassifiers xsi:type="ocl.ecore:TypeType" name="Pair">
       <referredType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Pair"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:TypeType" name="ForeignKey">
+      <referredType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//ForeignKey"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:TypeType" name="Tabla">
+      <referredType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tabla"/>
+    </eClassifiers>
   </ecore:EPackage>
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//TEnvioM"/>
@@ -2094,6 +2363,108 @@
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//TConsultaBD"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Workflow"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Workflow"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Workflow"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Workflow"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Workflow"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tabla"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tabla"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tabla"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tabla"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tabla"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tabla"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Atributo"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tabla"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Workflow"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
@@ -4578,6 +4949,476 @@
       <details key="start" value="10389"/>
       <details key="end" value="10415"/>
       <details key="line" value="313"/>
+    </eAnnotations>
+    <eAnnotations source="positions.496" references="/0/generateSQLScript">
+      <details key="start" value="11585"/>
+      <details key="end" value="12658"/>
+      <details key="line" value="346"/>
+    </eAnnotations>
+    <eAnnotations source="positions.497" references="/0/generateSQLScript/%">
+      <details key="start" value="11661"/>
+      <details key="end" value="11662"/>
+      <details key="line" value="348"/>
+    </eAnnotations>
+    <eAnnotations source="positions.498" references="/0/generateSQLScript/%.1">
+      <details key="start" value="11662"/>
+      <details key="end" value="12646"/>
+      <details key="line" value="349"/>
+    </eAnnotations>
+    <eAnnotations source="positions.499" references="/0/generateSQLScript/%.1/%">
+      <details key="start" value="11703"/>
+      <details key="end" value="11704"/>
+      <details key="line" value="350"/>
+    </eAnnotations>
+    <eAnnotations source="positions.500" references="/0/generateSQLScript/%.1/%.1">
+      <details key="start" value="11704"/>
+      <details key="end" value="12638"/>
+      <details key="line" value="351"/>
+    </eAnnotations>
+    <eAnnotations source="positions.501" references="/0/generateSQLScript/%.1/%.1/%">
+      <details key="start" value="11755"/>
+      <details key="end" value="11768"/>
+      <details key="line" value="352"/>
+    </eAnnotations>
+    <eAnnotations source="positions.502" references="/0/generateSQLScript/%.1/%.1/%.1">
+      <details key="start" value="11769"/>
+      <details key="end" value="11787"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.503" references="/0/generateSQLScript/%.1/%.1/%.1/aTabla">
+      <details key="start" value="11769"/>
+      <details key="end" value="11775"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.504" references="/0/generateSQLScript/%.1/%.1/%.2">
+      <details key="start" value="11789"/>
+      <details key="end" value="11793"/>
+      <details key="line" value="352"/>
+    </eAnnotations>
+    <eAnnotations source="positions.505" references="/0/generateSQLScript/%.1/%.1/%.3">
+      <details key="start" value="11794"/>
+      <details key="end" value="11823"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.506" references="/0/generateSQLScript/%.1/%.1/%.3/%">
+      <details key="start" value="11794"/>
+      <details key="end" value="11814"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.507" references="/0/generateSQLScript/%.1/%.1/%.3/%/aTabla">
+      <details key="start" value="11794"/>
+      <details key="end" value="11800"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.508" references="/0/generateSQLScript/%.1/%.1/%.4">
+      <details key="start" value="11825"/>
+      <details key="end" value="11847"/>
+      <details key="line" value="353"/>
+    </eAnnotations>
+    <eAnnotations source="positions.509" references="/0/generateSQLScript/%.1/%.1/%.5">
+      <details key="start" value="11847"/>
+      <details key="end" value="12374"/>
+      <details key="line" value="354"/>
+    </eAnnotations>
+    <eAnnotations source="positions.510" references="/0/generateSQLScript/%.1/%.1/%.5/%">
+      <details key="start" value="11893"/>
+      <details key="end" value="11984"/>
+      <details key="line" value="355"/>
+    </eAnnotations>
+    <eAnnotations source="positions.511" references="/0/generateSQLScript/%.1/%.1/%.5/%/%">
+      <details key="start" value="11929"/>
+      <details key="end" value="11937"/>
+      <details key="line" value="356"/>
+    </eAnnotations>
+    <eAnnotations source="positions.512" references="/0/generateSQLScript/%.1/%.1/%.5/%/%.1">
+      <details key="start" value="11938"/>
+      <details key="end" value="11957"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.513" references="/0/generateSQLScript/%.1/%.1/%.5/%/%.1/attr">
+      <details key="start" value="11938"/>
+      <details key="end" value="11942"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.514" references="/0/generateSQLScript/%.1/%.1/%.5/%/%.2">
+      <details key="start" value="11959"/>
+      <details key="end" value="11978"/>
+      <details key="line" value="356"/>
+    </eAnnotations>
+    <eAnnotations source="positions.515" references="/0/generateSQLScript/%.1/%.1/%.5/%/%.3">
+      <details key="start" value="11897"/>
+      <details key="end" value="11927"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.516" references="/0/generateSQLScript/%.1/%.1/%.5/%/%.3/attr">
+      <details key="start" value="11898"/>
+      <details key="end" value="11902"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.517" references="/0/generateSQLScript/%.1/%.1/%.5/%/%.3/%">
+      <details key="start" value="11915"/>
+      <details key="end" value="11925"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.518" references="/0/generateSQLScript/%.1/%.1/%.5/%.1">
+      <details key="start" value="11989"/>
+      <details key="end" value="12076"/>
+      <details key="line" value="358"/>
+    </eAnnotations>
+    <eAnnotations source="positions.519" references="/0/generateSQLScript/%.1/%.1/%.5/%.1/%">
+      <details key="start" value="12023"/>
+      <details key="end" value="12031"/>
+      <details key="line" value="359"/>
+    </eAnnotations>
+    <eAnnotations source="positions.520" references="/0/generateSQLScript/%.1/%.1/%.5/%.1/%.1">
+      <details key="start" value="12032"/>
+      <details key="end" value="12051"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.521" references="/0/generateSQLScript/%.1/%.1/%.5/%.1/%.1/attr">
+      <details key="start" value="12032"/>
+      <details key="end" value="12036"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.522" references="/0/generateSQLScript/%.1/%.1/%.5/%.1/%.2">
+      <details key="start" value="12053"/>
+      <details key="end" value="12070"/>
+      <details key="line" value="359"/>
+    </eAnnotations>
+    <eAnnotations source="positions.523" references="/0/generateSQLScript/%.1/%.1/%.5/%.1/%.3">
+      <details key="start" value="11993"/>
+      <details key="end" value="12021"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.524" references="/0/generateSQLScript/%.1/%.1/%.5/%.1/%.3/attr">
+      <details key="start" value="11994"/>
+      <details key="end" value="11998"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.525" references="/0/generateSQLScript/%.1/%.1/%.5/%.1/%.3/%">
+      <details key="start" value="12011"/>
+      <details key="end" value="12019"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.526" references="/0/generateSQLScript/%.1/%.1/%.5/%.2">
+      <details key="start" value="12081"/>
+      <details key="end" value="12172"/>
+      <details key="line" value="361"/>
+    </eAnnotations>
+    <eAnnotations source="positions.527" references="/0/generateSQLScript/%.1/%.1/%.5/%.2/%">
+      <details key="start" value="12117"/>
+      <details key="end" value="12125"/>
+      <details key="line" value="362"/>
+    </eAnnotations>
+    <eAnnotations source="positions.528" references="/0/generateSQLScript/%.1/%.1/%.5/%.2/%.1">
+      <details key="start" value="12126"/>
+      <details key="end" value="12145"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.529" references="/0/generateSQLScript/%.1/%.1/%.5/%.2/%.1/attr">
+      <details key="start" value="12126"/>
+      <details key="end" value="12130"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.530" references="/0/generateSQLScript/%.1/%.1/%.5/%.2/%.2">
+      <details key="start" value="12147"/>
+      <details key="end" value="12166"/>
+      <details key="line" value="362"/>
+    </eAnnotations>
+    <eAnnotations source="positions.531" references="/0/generateSQLScript/%.1/%.1/%.5/%.2/%.3">
+      <details key="start" value="12085"/>
+      <details key="end" value="12115"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.532" references="/0/generateSQLScript/%.1/%.1/%.5/%.2/%.3/attr">
+      <details key="start" value="12086"/>
+      <details key="end" value="12090"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.533" references="/0/generateSQLScript/%.1/%.1/%.5/%.2/%.3/%">
+      <details key="start" value="12103"/>
+      <details key="end" value="12113"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.534" references="/0/generateSQLScript/%.1/%.1/%.5/%.3">
+      <details key="start" value="12177"/>
+      <details key="end" value="12275"/>
+      <details key="line" value="364"/>
+    </eAnnotations>
+    <eAnnotations source="positions.535" references="/0/generateSQLScript/%.1/%.1/%.5/%.3/%">
+      <details key="start" value="12212"/>
+      <details key="end" value="12220"/>
+      <details key="line" value="365"/>
+    </eAnnotations>
+    <eAnnotations source="positions.536" references="/0/generateSQLScript/%.1/%.1/%.5/%.3/%.1">
+      <details key="start" value="12221"/>
+      <details key="end" value="12240"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.537" references="/0/generateSQLScript/%.1/%.1/%.5/%.3/%.1/attr">
+      <details key="start" value="12221"/>
+      <details key="end" value="12225"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.538" references="/0/generateSQLScript/%.1/%.1/%.5/%.3/%.2">
+      <details key="start" value="12242"/>
+      <details key="end" value="12266"/>
+      <details key="line" value="365"/>
+    </eAnnotations>
+    <eAnnotations source="positions.539" references="/0/generateSQLScript/%.1/%.1/%.5/%.3/%.3">
+      <details key="start" value="12181"/>
+      <details key="end" value="12210"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.540" references="/0/generateSQLScript/%.1/%.1/%.5/%.3/%.3/attr">
+      <details key="start" value="12182"/>
+      <details key="end" value="12186"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.541" references="/0/generateSQLScript/%.1/%.1/%.5/%.3/%.3/%">
+      <details key="start" value="12199"/>
+      <details key="end" value="12208"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.542" references="/0/generateSQLScript/%.1/%.1/%.5/%.4">
+      <details key="start" value="12276"/>
+      <details key="end" value="12277"/>
+      <details key="line" value="367"/>
+    </eAnnotations>
+    <eAnnotations source="positions.543" references="/0/generateSQLScript/%.1/%.1/%.5/%.5">
+      <details key="start" value="12278"/>
+      <details key="end" value="12366"/>
+      <details key="line" value="368"/>
+    </eAnnotations>
+    <eAnnotations source="positions.544" references="/0/generateSQLScript/%.1/%.1/%.5/%.5/%">
+      <details key="start" value="12311"/>
+      <details key="end" value="12319"/>
+      <details key="line" value="369"/>
+    </eAnnotations>
+    <eAnnotations source="positions.545" references="/0/generateSQLScript/%.1/%.1/%.5/%.5/%.1">
+      <details key="start" value="12320"/>
+      <details key="end" value="12339"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.546" references="/0/generateSQLScript/%.1/%.1/%.5/%.5/%.1/attr">
+      <details key="start" value="12320"/>
+      <details key="end" value="12324"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.547" references="/0/generateSQLScript/%.1/%.1/%.5/%.5/%.2">
+      <details key="start" value="12341"/>
+      <details key="end" value="12357"/>
+      <details key="line" value="369"/>
+    </eAnnotations>
+    <eAnnotations source="positions.548" references="/0/generateSQLScript/%.1/%.1/%.5/%.5/%.3">
+      <details key="start" value="12282"/>
+      <details key="end" value="12309"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.549" references="/0/generateSQLScript/%.1/%.1/%.5/%.5/%.3/attr">
+      <details key="start" value="12283"/>
+      <details key="end" value="12287"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.550" references="/0/generateSQLScript/%.1/%.1/%.5/%.5/%.3/%">
+      <details key="start" value="12300"/>
+      <details key="end" value="12307"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.551" references="/0/generateSQLScript/%.1/%.1/%.5/%.6">
+      <details key="start" value="12367"/>
+      <details key="end" value="12368"/>
+      <details key="line" value="371"/>
+    </eAnnotations>
+    <eAnnotations source="positions.552" references="/0/generateSQLScript/%.1/%.1/%.5/attr">
+      <details key="start" value="11853"/>
+      <details key="end" value="11868"/>
+      <details key="line" value="354"/>
+    </eAnnotations>
+    <eAnnotations source="positions.553" references="/0/generateSQLScript/%.1/%.1/%.5/%.7">
+      <details key="start" value="11871"/>
+      <details key="end" value="11886"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.554" references="/0/generateSQLScript/%.1/%.1/%.5/%.7/aTabla">
+      <details key="start" value="11871"/>
+      <details key="end" value="11877"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.555" references="/0/generateSQLScript/%.1/%.1/%.6">
+      <details key="start" value="12375"/>
+      <details key="end" value="12376"/>
+      <details key="line" value="373"/>
+    </eAnnotations>
+    <eAnnotations source="positions.556" references="/0/generateSQLScript/%.1/%.1/%.7">
+      <details key="start" value="12376"/>
+      <details key="end" value="12628"/>
+      <details key="line" value="374"/>
+    </eAnnotations>
+    <eAnnotations source="positions.557" references="/0/generateSQLScript/%.1/%.1/%.7/%">
+      <details key="start" value="12422"/>
+      <details key="end" value="12621"/>
+      <details key="line" value="375"/>
+    </eAnnotations>
+    <eAnnotations source="positions.558" references="/0/generateSQLScript/%.1/%.1/%.7/%/%">
+      <details key="start" value="12458"/>
+      <details key="end" value="12481"/>
+      <details key="line" value="376"/>
+    </eAnnotations>
+    <eAnnotations source="positions.559" references="/0/generateSQLScript/%.1/%.1/%.7/%/%.1">
+      <details key="start" value="12482"/>
+      <details key="end" value="12523"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.560" references="/0/generateSQLScript/%.1/%.1/%.7/%/%.1/%">
+      <details key="start" value="12482"/>
+      <details key="end" value="12508"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.561" references="/0/generateSQLScript/%.1/%.1/%.7/%/%.1/%/attr">
+      <details key="start" value="12482"/>
+      <details key="end" value="12486"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.562" references="/0/generateSQLScript/%.1/%.1/%.7/%/%.1/%/%">
+      <details key="start" value="12497"/>
+      <details key="end" value="12507"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.563" references="/0/generateSQLScript/%.1/%.1/%.7/%/%.2">
+      <details key="start" value="12525"/>
+      <details key="end" value="12538"/>
+      <details key="line" value="376"/>
+    </eAnnotations>
+    <eAnnotations source="positions.564" references="/0/generateSQLScript/%.1/%.1/%.7/%/%.3">
+      <details key="start" value="12539"/>
+      <details key="end" value="12585"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.565" references="/0/generateSQLScript/%.1/%.1/%.7/%/%.3/%">
+      <details key="start" value="12539"/>
+      <details key="end" value="12573"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.566" references="/0/generateSQLScript/%.1/%.1/%.7/%/%.3/%/%">
+      <details key="start" value="12539"/>
+      <details key="end" value="12556"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.567" references="/0/generateSQLScript/%.1/%.1/%.7/%/%.3/%/%/attr">
+      <details key="start" value="12539"/>
+      <details key="end" value="12543"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.568" references="/0/generateSQLScript/%.1/%.1/%.7/%/%.3/%/%.1">
+      <details key="start" value="12567"/>
+      <details key="end" value="12572"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.569" references="/0/generateSQLScript/%.1/%.1/%.7/%/%.4">
+      <details key="start" value="12587"/>
+      <details key="end" value="12588"/>
+      <details key="line" value="376"/>
+    </eAnnotations>
+    <eAnnotations source="positions.570" references="/0/generateSQLScript/%.1/%.1/%.7/%/%.5">
+      <details key="start" value="12589"/>
+      <details key="end" value="12608"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.571" references="/0/generateSQLScript/%.1/%.1/%.7/%/%.5/attr">
+      <details key="start" value="12589"/>
+      <details key="end" value="12593"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.572" references="/0/generateSQLScript/%.1/%.1/%.7/%/%.6">
+      <details key="start" value="12610"/>
+      <details key="end" value="12612"/>
+      <details key="line" value="376"/>
+    </eAnnotations>
+    <eAnnotations source="positions.573" references="/0/generateSQLScript/%.1/%.1/%.7/%/%.7">
+      <details key="start" value="12426"/>
+      <details key="end" value="12456"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.574" references="/0/generateSQLScript/%.1/%.1/%.7/%/%.7/attr">
+      <details key="start" value="12427"/>
+      <details key="end" value="12431"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.575" references="/0/generateSQLScript/%.1/%.1/%.7/%/%.7/%">
+      <details key="start" value="12444"/>
+      <details key="end" value="12454"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.576" references="/0/generateSQLScript/%.1/%.1/%.7/attr">
+      <details key="start" value="12382"/>
+      <details key="end" value="12397"/>
+      <details key="line" value="374"/>
+    </eAnnotations>
+    <eAnnotations source="positions.577" references="/0/generateSQLScript/%.1/%.1/%.7/%.1">
+      <details key="start" value="12400"/>
+      <details key="end" value="12415"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.578" references="/0/generateSQLScript/%.1/%.1/%.7/%.1/aTabla">
+      <details key="start" value="12400"/>
+      <details key="end" value="12406"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.579" references="/0/generateSQLScript/%.1/%.1/%.8">
+      <details key="start" value="12629"/>
+      <details key="end" value="12632"/>
+      <details key="line" value="379"/>
+    </eAnnotations>
+    <eAnnotations source="positions.580" references="/0/generateSQLScript/%.1/%.1/aTabla">
+      <details key="start" value="11710"/>
+      <details key="end" value="11724"/>
+      <details key="line" value="351"/>
+    </eAnnotations>
+    <eAnnotations source="positions.581" references="/0/generateSQLScript/%.1/%.1/collect">
+      <details key="start" value="11727"/>
+      <details key="end" value="11752"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.582" references="/0/generateSQLScript/%.1/%.1/collect/%">
+      <details key="start" value="11727"/>
+      <details key="end" value="11746"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.583" references="/0/generateSQLScript/%.1/%.1/collect/%/aWorkflow">
+      <details key="start" value="11727"/>
+      <details key="end" value="11736"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.584" references="/0/generateSQLScript/%.1/%.1/collect/%.1">
+      <details key="start" value="11747"/>
+      <details key="end" value="11752"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.585" references="/0/generateSQLScript/%.1/%.1/collect/%.1/temp1">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.586" references="/0/generateSQLScript/%.1/%.1/collect/temp1">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.587" references="/0/generateSQLScript/%.1/%.2">
+      <details key="start" value="11669"/>
+      <details key="end" value="11684"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.588" references="/0/generateSQLScript/%.1/%.3">
+      <details key="start" value="11693"/>
+      <details key="end" value="11700"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.589" references="/0/generateSQLScript/aWorkflow">
+      <details key="start" value="11620"/>
+      <details key="end" value="11640"/>
+      <details key="line" value="346"/>
     </eAnnotations>
   </ecore:EAnnotation>
 </xmi:XMI>
