@@ -1,0 +1,345 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module generateWorkFlow.
+ */]
+[module generateWorkFlow('http://www.example.org/proyectoWorkflow')]
+
+
+[**
+ * The documentation of the template generateElement.
+ * @param aWorkflow
+ */]
+[template public generateElement(aWorkflow : Workflow)]
+[comment @main /]
+[for (actor : Actor | aWorkflow.actor)]
+[file (actor.nombreActor+'/index.html', false, 'UTF-8')]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina principal del [actor.nombreActor/]</title>
+    <link rel="stylesheet" href="./../css/styles.css">
+</head>
+<body>
+    <header>    
+        <h1>[aWorkflow.nombreWorkflow/]</h1>
+        <h1>[actor.nombreActor/]</h1>
+    </header>
+
+    <main>
+		[if (actor.TInicioActor <> null)]
+			<a href="[actor.TInicioActor.nombreInicio/].html">[actor.TInicioActor.nombreInicio/]</a>
+		[/if]
+        [for (aTarea : Tarea | actor.tareas)]
+        	<a href="[aTarea.nombreTarea/].html">[aTarea.nombreTarea/]</a>
+        [/for]
+        
+      	[if (actor.TFinActor <> null)]
+			<a href="[actor.TFinActor.nombreFin/].html">[actor.TFinActor.nombreFin/]</a>
+		[/if]
+        
+    </main>
+</body>
+</html>
+[/file]
+[/for]
+
+[/template]
+
+[template public generateTEnvMensaje(aTEnviar : TEnvioM)]
+	[comment @main /]
+	[file (aTEnviar.nombreTarea+'.html', false, 'UTF-8')]
+		<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina enviar mensaje</title>
+    <link rel="stylesheet" href="./../css/styles.css">
+</head>
+<body>
+   <header>    
+        <h1>NOMBRE [aTEnviar.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
+        <h1>NOMBRE [aTEnviar.actor.nombreActor/]</h1>
+    </header>
+
+    <main>
+        <form action="TEnvMensaje.html" method="GET">
+            
+    
+            <label for="textarea">Textarea:</label><br>
+            <textarea id="textarea" name="textarea"></textarea><br>
+    
+            <input type="submit" value="Enviar">
+        </form>
+    </main>
+
+
+</body>
+</html>
+	[/file]
+[/template]
+
+[template public generateTRecibirMensaje(aTRecibirMensaje : TRecepcionM)]
+[comment @main /]
+	[file (actor.nombreActor+'/'+aTRecibirMensaje.nombreTarea+'.html', false, 'UTF-8')]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina principal del [actor.nombreActor/]</title>
+    <link rel="stylesheet" href="./../css/styles.css">
+</head>
+<body>
+    <header>    
+        <h1>NOMBRE [aTRecibirMensaje.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
+        <h1>NOMBRE [aTRecibirMensaje.actor.nombreActor/]</h1>
+    </header>
+
+    <main>
+		
+        [if (aTRecibirMensaje.tareaSiguiente <> null)]
+        	<a href="[aTRecibirMensaje.tareaSiguiente.nombreTarea/].html">[aTRecibirMensaje.tareaSiguiente.nombreTarea/]</a>
+		[elseif (aTRecibirMensaje.tfin <> null)]
+			<a href="[aTRecibirMensaje.tfin.nombreFin/].html">[aTRecibirMensaje.tfin.nombreFin/]</a>
+        [/if]
+
+        
+    </main>
+</body>
+</html>
+[/file]
+[/template]
+
+[template public generateTUsuario(aTUsuario: TUsuario)]
+[comment @main/]
+[file ('TUsuario_'+aTUsuario.actor.nombreActor+'.html', false, 'UTF-8')]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina tarea de usuario</title>
+    <link rel="stylesheet" href="./../css/styles.css">
+</head>
+<body>
+    <header>    
+        <h1>NOMBRE [aTUsuario.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
+        <h1>NOMBRE [aTUsuario.actor.nombreActor/]</h1>
+    </header>
+
+    <main>
+        <form action="TUsuario.html" method="GET">
+            <!-- Aquí comienzan los campos generados dinámicamente -->
+            [for (atributo : Atributo |  aTUsuario.tabla.atributo)]
+				[if (atributo.oclIsTypeOf(_'String'))]
+                    <label for="[atributo.nombreAtributo/]">[atributo.nombreAtributo/]:</label><br>
+                    <input type="text" id="[atributo.nombreAtributo/]" name="[atributo.nombreAtributo/]"><br>
+				[/if]
+
+                [if (atributo.oclIsTypeOf(_'Integer'))]
+                    <label for="[atributo.nombreAtributo/]">[atributo.nombreAtributo/]:</label><br>
+                    <input type="number" id="[atributo.nombreAtributo/]" name="[atributo.nombreAtributo/]"><br>
+				[/if]
+                [if (atributo.oclIsTypeOf(_'Float'))]
+                    <label for="[atributo.nombreAtributo/]">[atributo.nombreAtributo/]:</label><br>
+                    <input type="number" id="[atributo.nombreAtributo/]" name="[atributo.nombreAtributo/]" step="0.01"><br>
+				[/if]
+
+                [if (atributo.oclIsTypeOf(_'Date'))]
+                    <label for="[atributo.nombreAtributo/]">[atributo.nombreAtributo/]:</label><br>
+                    <input type="date" id="[atributo.nombreAtributo/]" name="[atributo.nombreAtributo/]"><br>
+				[/if]
+
+                [if (atributo.oclIsTypeOf(_'Boolean'))]
+                    <label for="[atributo.nombreAtributo/]">[atributo.nombreAtributo/]:</label>
+                    <input type="checkbox" id="[atributo.nombreAtributo/]" name="[atributo.nombreAtributo/]"><br>
+                [/if]
+
+				[if (atributo.oclIsTypeOf(Pair))]
+                    <label for="[atributo.nombreAtributo/]">[atributo.nombreAtributo/]:</label><br>
+				    <input type="number" id="[atributo.nombreAtributo/]" name="[atributo.nombreAtributo/]" 
+				    min="[atributo.oclAsType(Pair).minValue/]" max="[atributo.oclAsType(Pair).maxValue/]"><br>
+                [/if]
+
+            [/for]    
+            <input type="submit" value="Enviar">
+        </form>
+    </main>
+
+</body>
+</html>
+[/file]
+[/template]
+
+[template public generateTService(aTServicio: TServicio)]
+[comment @main/]
+[file ('TServicio_'+aTServicio.actor.nombreActor+'.html', false, 'UTF-8')]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina tarea de usuario</title>
+    <link rel="stylesheet" href="./../css/styles.css">
+</head>
+<body>
+    <header>    
+        <h1>NOMBRE [aTServicio.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
+        <h1>NOMBRE [aTServicio.actor.nombreActor/]</h1>
+    </header>
+
+    <main>
+        <button type="button" onclick="location.href='ejecutar_servicio.html';">Ejecutar Servicio</button>
+        <button type="button" onclick="location.href='[aTServicio.tareaSiguiente.nombreTarea/]+'.html'';">Siguiente</button>
+    </main>
+
+</body>
+</html>
+[/file]
+[/template]
+
+[template public generateTConsultaBD(aTConsulta: TConsultaBD)]
+[comment @main/]
+[file ('TConsulta_'+aTConsulta.actor.nombreActor+'.html', false, 'UTF-8')]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina tarea de usuario</title>
+    <link rel="stylesheet" href="./../css/styles.css">
+</head>
+<body>
+    <header>    
+        <h1>NOMBRE [aTConsulta.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
+        <h1>NOMBRE [aTConsulta.actor.nombreActor/]</h1>
+    </header>
+
+    <main>
+        <fieldset>
+            <legend>FORMULARIO</legend>
+            <form action="">
+                <label for="campo-bd">Introduce el [aTConsulta.atributo.nombreAtributo/] a buscar</label>
+                <input type="text" name="campo-[aTConsulta.atributo.nombreAtributo/]" id="campo-[aTConsulta.atributo.nombreAtributo/]">
+                <button type="submit">Consultar</button>
+            </form>
+        </fieldset>
+
+        <a href="http://" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
+    </main>
+
+</body>
+</html>
+[/file]
+
+[aTConsulta.generateResultCodSQLConsult(aTConsulta)/]
+[/template]
+
+[template public generateTBorradoBD(aTBorrado: TBorradoBD)]
+[comment @main/]
+[file (aTBorrado.nombreTarea+'.html', false, 'UTF-8')]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina tarea de usuario</title>
+    <link rel="stylesheet" href="./../css/styles.css">
+</head>
+<body>
+    <header>    
+        <h1>NOMBRE [aTBorrado.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
+        <h1>NOMBRE [aTBorrado.actor.nombreActor/]</h1>
+    </header>
+
+    <main>
+        <fieldset>
+            <legend>FORMULARIO</legend>
+            <form action="">
+                <label for="campo-bd">Introduce el [aTBorrado.atributo.nombreAtributo/] a borrar</label>
+                <input type="text" name="campo-[aTBorrado.atributo.nombreAtributo/]" id="campo-[aTBorrado.atributo.nombreAtributo/]">
+                <button type="submit">Consultar</button>
+            </form>
+        </fieldset>
+
+        <a href="http://" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
+    </main>
+
+</body>
+</html>
+[/file]
+
+[aTBorrado.generateResultCodSQLDelete(aTBorrado)/]
+[/template]
+
+[template public generateResultCodSQLDelete(aTBorrado : TBorradoBD)]
+[file ('codSQLBorrado-'+aTBorrado.tabla.nombreTabla+'-'+aTBorrado.atributo.nombreAtributo+'.html', false, 'UTF-8')]
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina consulta SQL</title>
+    <link rel="stylesheet" href="./../css/styles.css">
+</head>
+<body>
+    <header>    
+        <h1>NOMBRE [aTBorrado.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
+        <h1>NOMBRE [aTBorrado.actor.nombreActor/]</h1>
+    </header>
+    <a href="http://" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
+
+    <p>A continuación se muestran los cuatro tipos de consultas SQL:</p> 
+  
+        SELECT * From [aTBorrado.tabla.nombreTabla/];
+       
+INSERT INTO [aTBorrado.tabla.nombreTabla/] ([for (aColumn : Atributo | aTBorrado.tabla.atributo) separator (', ')][aColumn.nombreAtributo/][/for])
+VALUES (value1, value2, ...);
+        DELETE FROM [aTBorrado.tabla.nombreTabla/] WHERE [aTBorrado.atributo/] = condition;
+   
+
+</body>
+</html>
+[/file]
+
+
+[/template]
+
+[template public generateResultCodSQLConsult(aTConsultaBD : TConsultaBD)]
+
+[file ('codSQLConsulta-'+aTConsultaBD.tabla.nombreTabla+'-'+aTConsultaBD.atributo.nombreAtributo+'.html', false, 'UTF-8')]
+		<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina consulta SQL</title>
+    <link rel="stylesheet" href="./../css/styles.css">
+</head>
+<body>
+    <header>    
+        <h1>NOMBRE [aTConsultaBD.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
+        <h1>NOMBRE [aTConsultaBD.actor.nombreActor/]</h1>
+    </header>
+    <a href="http://" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
+
+    <p>A continuación se muestran los cuatro tipos de consultas SQL:</p> 
+  
+        SELECT * From [aTConsultaBD.tabla.nombreTabla/] WHERE [aTConsultaBD.atributo/] = condition;
+       
+INSERT INTO [aTConsultaBD.tabla.nombreTabla/] ([for (aColumn : Atributo | aTConsultaBD.tabla.atributo) separator (', ')][aColumn.nombreAtributo/][/for])
+VALUES (value1, value2, ...);
+        DELETE FROM [aTConsultaBD.tabla.nombreTabla/] WHERE [aTConsultaBD.atributo/] = condition;
+   
+
+</body>
+</html>
+[/file]
+
+
+[/template]
