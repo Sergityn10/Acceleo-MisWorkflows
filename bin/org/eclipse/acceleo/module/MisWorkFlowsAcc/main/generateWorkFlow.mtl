@@ -344,6 +344,7 @@ VALUES (value1, value2, ...);
 
 
 [/template]
+<<<<<<< HEAD
 
 [template public generateCSS()]
 	
@@ -473,3 +474,44 @@ form{
 }
 	[/file]
 [/template]
+=======
+[template public generateSQLScript(aWorkflow : Workflow)]
+[comment @main /]
+
+[file ('sqlScript.sql', false, 'UTF-8')]
+
+[for (aTabla : Tabla | aWorkflow.basedatos.tabla)]
+CREATE TABLE [aTabla.nombreTabla/] (
+	[aTabla.identificador.nombreId/] INTEGER PRIMARY KEY,
+[for (attr : Atributo | aTabla.atributo)]
+    [if (attr.oclIsTypeOf(_'Boolean'))]
+        [attr.nombreAtributo/] BOOLEAN NOT NULL,
+	[/if]
+    [if (attr.oclIsTypeOf(_'Float'))]
+        [attr.nombreAtributo/] FLOAT NOT NULL,
+	[/if]
+    [if (attr.oclIsTypeOf(_'Integer'))]
+        [attr.nombreAtributo/] INTEGER NOT NULL,
+	[/if]
+    [if (attr.oclIsTypeOf(_'String'))]
+        [attr.nombreAtributo/] VARCHAR(255) NOT NULL,
+    [/if]
+
+	[if (attr.oclIsTypeOf(_'Date'))]
+        [attr.nombreAtributo/] DATE NOT NULL,
+    [/if]
+
+[/for]
+
+[for (attr : Atributo | aTabla.atributo)]
+    [if (attr.oclIsTypeOf(ForeignKey))]
+        , FOREIGN KEY ([attr.oclAsType(ForeignKey).nombreAtributo/]) REFERENCES [attr.eContainer().oclAsType(Tabla).nombreTabla/]([attr.nombreAtributo/])
+    [/if]
+[/for]
+);
+[/for]
+[/file]
+[/template]
+
+
+>>>>>>> 51d28db6938b6f63fdd21cfe4d40831d1f7da028
