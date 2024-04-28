@@ -344,7 +344,6 @@ VALUES (value1, value2, ...);
 
 
 [/template]
-<<<<<<< HEAD
 
 [template public generateCSS()]
 	
@@ -474,7 +473,7 @@ form{
 }
 	[/file]
 [/template]
-=======
+
 [template public generateSQLScript(aWorkflow : Workflow)]
 [comment @main /]
 
@@ -514,4 +513,4 @@ CREATE TABLE [aTabla.nombreTabla/] (
 [/template]
 
 
->>>>>>> 51d28db6938b6f63fdd21cfe4d40831d1f7da028
+
