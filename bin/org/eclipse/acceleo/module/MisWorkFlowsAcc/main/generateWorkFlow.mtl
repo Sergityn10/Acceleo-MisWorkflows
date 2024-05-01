@@ -572,34 +572,25 @@ form{
 
 [for (aTabla : Tabla | aWorkflow.basedatos.tabla)]
 CREATE TABLE [aTabla.nombreTabla/] (
-
-[for (attr : Atributo | aTabla.atributo)]
-	[if (attr.isPrimaryKey)]
-        [attr.nombreAtributo/] INTEGER PRIMARY KEY,	
-	[/if]
-	
+[for (attr : Atributo | aTabla.atributo) separator (', ')]
     [if (attr.oclIsTypeOf(_'Boolean'))]
-        [attr.nombreAtributo/] BOOLEAN NOT NULL,
+        [attr.nombreAtributo/] BOOLEAN NOT NULL [if (attr.isPrimaryKey)] PRIMARY KEY [/if] [if (attr.foreignKey <> null)] ,FOREIGN KEY ([attr.nombreAtributo/]) REFERENCES [attr.foreignKey.eContainer().oclAsType(Tabla).nombreTabla/]([attr.foreignKey.nombreAtributo/]) [/if]
 	[/if]
     [if (attr.oclIsTypeOf(_'Float'))]
-        [attr.nombreAtributo/] FLOAT NOT NULL,
+        [attr.nombreAtributo/] FLOAT NOT NULL [if (attr.isPrimaryKey)] PRIMARY KEY [/if] [if (attr.foreignKey <> null)] ,FOREIGN KEY ([attr.nombreAtributo/]) REFERENCES [attr.foreignKey.eContainer().oclAsType(Tabla).nombreTabla/]([attr.foreignKey.nombreAtributo/]) [/if]
 	[/if]
     [if (attr.oclIsTypeOf(_'Integer'))]
-        [attr.nombreAtributo/] INTEGER NOT NULL,
+        [attr.nombreAtributo/] INTEGER NOT NULL[if (attr.isPrimaryKey)] PRIMARY KEY[/if] [if (attr.foreignKey <> null)] ,FOREIGN KEY ([attr.nombreAtributo/]) REFERENCES [attr.foreignKey.eContainer().oclAsType(Tabla).nombreTabla/]([attr.foreignKey.nombreAtributo/]) [/if]
 	[/if]
     [if (attr.oclIsTypeOf(_'String'))]
-        [attr.nombreAtributo/] VARCHAR(255) NOT NULL,
+        [attr.nombreAtributo/] VARCHAR(255) NOT NULL[if (attr.isPrimaryKey)] PRIMARY KEY[/if] [if (attr.foreignKey <> null)] ,FOREIGN KEY ([attr.nombreAtributo/]) REFERENCES [attr.foreignKey.eContainer().oclAsType(Tabla).nombreTabla/]([attr.foreignKey.nombreAtributo/]) [/if]
     [/if]
-
 	[if (attr.oclIsTypeOf(_'Date'))]
-        [attr.nombreAtributo/] DATE NOT NULL,
+        [attr.nombreAtributo/] DATE NOT NULL[if (attr.isPrimaryKey)] PRIMARY KEY[/if] [if (attr.foreignKey <> null)] ,FOREIGN KEY ([attr.nombreAtributo/]) REFERENCES [attr.foreignKey.eContainer().oclAsType(Tabla).nombreTabla/]([attr.foreignKey.nombreAtributo/]) [/if]
     [/if]
-
-[/for]
-
-[for (attr : Atributo | aTabla.atributo)]
-    [if (attr.foreignKey <> null)]
-        , FOREIGN KEY ([attr.nombreAtributo/]) REFERENCES [attr.eContainer().oclAsType(Tabla).nombreTabla/]([attr.foreignKey.nombreAtributo/])
+	[if (attr.oclIsTypeOf(Pair))]
+        [attr.nombreAtributo/]_min INTEGER NOT NULL,
+		[attr.nombreAtributo/]_max INTEGER NOT NULL
     [/if]
 [/for]
 );
