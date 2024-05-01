@@ -30,14 +30,14 @@
 
     <main>
 		[if (actor.TInicioActor <> null)]
-			<a href="[actor.TInicioActor.nombreInicio/].html">[actor.TInicioActor.nombreInicio/]</a>
+			<a href="[actor.TInicioActor.eClass().name/]_[actor.TInicioActor.nombreInicio/]_[actor.nombreActor/].html"> Tarea inicial</a>
 		[/if]
         [for (aTarea : Tarea | actor.tareas)]
-        	<a href="[aTarea.nombreTarea/].html">[aTarea.nombreTarea/]</a>
+        	<a href="[aTarea.eClass().name/]_[aTarea.nombreTarea/]_[actor.nombreActor/].html">[aTarea.nombreTarea/]</a>
         [/for]
         
       	[if (actor.TFinActor <> null)]
-			<a href="[actor.TFinActor.nombreFin/].html">[actor.TFinActor.nombreFin/]</a>
+			<a href="[actor.TFinActor.eClass().name/]_[actor.TFinActor.nombreFin/]_[actor.nombreActor/].html">Tarea final</a>
 		[/if]
         
     </main>
@@ -103,7 +103,7 @@
 
 [template public generateTEnvMensaje(aTEnviar : TEnvioM)]
 	[comment @main /]
-	[file (aTEnviar.actor.nombreActor+'/'+aTEnviar.nombreTarea+'.html', false, 'UTF-8')]
+	[file (aTEnviar.actor.nombreActor+'/'+aTEnviar.eClass().name+'_'+aTEnviar.nombreTarea+'_'+aTEnviar.actor.nombreActor+'.html', false, 'UTF-8')]
 		<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -137,7 +137,7 @@
 
 [template public generateTRecibirMensaje(aTRecibirMensaje : TRecepcionM)]
 [comment @main /]
-	[file (actor.nombreActor+'/'+aTRecibirMensaje.nombreTarea+'.html', false, 'UTF-8')]
+	[file (aTRecibirMensaje.actor.nombreActor+'/'+aTRecibirMensaje.eClass().name+'_'+aTRecibirMensaje.nombreTarea+'_'+aTRecibirMensaje.actor.nombreActor+'.html', false, 'UTF-8')]
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -170,7 +170,7 @@
 
 [template public generateTUsuario(aTUsuario: TUsuario)]
 [comment @main/]
-[file (aTUsuario.actor.nombreActor+'/'+'TUsuario_'+aTUsuario.actor.nombreActor+'.html', false, 'UTF-8')]
+[file (aTUsuario.actor.nombreActor+'/'+aTUsuario.eClass().name+'_'+aTUsuario.nombreTarea+'_'+aTUsuario.actor.nombreActor+'.html', false, 'UTF-8')]
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -231,7 +231,8 @@
 
 [template public generateTService(aTServicio: TServicio)]
 [comment @main/]
-[file (aTServicio.actor.nombreActor+'/'+'TServicio_'+aTServicio.actor.nombreActor+'.html', false, 'UTF-8')]
+
+[file (aTServicio.actor.nombreActor+'/'+aTServicio.eClass().name+'_'+aTServicio.nombreTarea+'_'+aTServicio.actor.nombreActor+'.html', false, 'UTF-8')]
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -258,7 +259,7 @@
 
 [template public generateTConsultaBD(aTConsulta: TConsultaBD)]
 [comment @main/]
-[file (aTConsulta.actor.nombreActor+'/'+'TConsulta_'+aTConsulta.actor.nombreActor+'.html', false, 'UTF-8')]
+[file (aTConsulta.actor.nombreActor+'/'+aTConsulta.eClass().name+'_'+aTConsulta.nombreTarea+'_'+aTConsulta.actor.nombreActor+'.html', false, 'UTF-8')]
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -295,7 +296,8 @@
 
 [template public generateTBorradoBD(aTBorrado: TBorradoBD)]
 [comment @main/]
-[file (aTBorrado.actor.nombreActor+'/'+aTBorrado.nombreTarea+'.html', false, 'UTF-8')]
+
+[file (aTBorrado.actor.nombreActor+'/'+aTBorrado.eClass().name+'_'+aTBorrado.nombreTarea+'_'+aTBorrado.actor.nombreActor+'.html', false, 'UTF-8')]
 <!DOCTYPE html>
 <html lang="en">
 <head>
