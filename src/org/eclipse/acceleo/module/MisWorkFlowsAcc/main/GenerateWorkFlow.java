@@ -42,7 +42,7 @@ public class GenerateWorkFlow extends AbstractAcceleoGenerator {
      *
      * @generated
      */
-    public static final String[] TEMPLATE_NAMES = { "generateElement", "generateTEnvMensaje", "generateTRecibirMensaje", "generateTUsuario", "generateTService", "generateTConsultaBD", "generateTBorradoBD", "generateSQLScript" };
+    public static final String[] TEMPLATE_NAMES = { "generateElement", "generateTInicio", "generateTFinal", "generateTEnvMensaje", "generateTRecibirMensaje", "generateTUsuario", "generateTService", "generateTConsultaBD", "generateTBorradoBD", "generateSQLScript" };
     
     /**
      * The list of properties files from the launch parameters (Launch configuration).

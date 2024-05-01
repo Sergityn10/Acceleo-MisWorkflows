@@ -44,9 +44,61 @@
 </body>
 </html>
 [/file]
-[generateCSS()/]
-[/for]
 
+[/for]
+[generateCSS()/]
+[/template]
+
+[template public generateTInicio(aTInicio : TInicio)]
+	[comment @main /]
+	[file (aTInicio.actor.nombreActor+'/TInicio_'+aTInicio.nombreInicio+'_'+aTInicio.actor.nombreActor+'.html', false, 'UTF-8')]
+		<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarea de inicio para el Workflow NOM-WORKFLOW</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header>    
+        <h1>[aTInicio.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
+        <h1>[aTInicio.actor.nombreActor/]</h1>
+    </header>
+    <main>
+        <h2>Tarea de inicio para el Workflow NOM-WORKFLOW</h2>
+        <a href="[aTInicio.tarea.eClass().name/]_[aTInicio.tarea.nombreTarea/]_[aTInicio.actor.nombreActor/].html">Empezar workflow</a>
+		
+    </main>
+</body>
+</html>
+	[/file]
+[/template]
+
+[template public generateTFinal(aTFin : TFin)]
+	[comment @main /]
+	[file (aTFin.actor.nombreActor+'/TFin_'+aTFin.nombreFin+'_'+aTFin.actor.nombreActor+'.html', false, 'UTF-8')]
+		<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarea final para el Workflow [aTFin.eContainer().oclAsType(Workflow).nombreWorkflow/]</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header>    
+        <h1>[aTFin.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
+        <h1>[aTFin.actor.nombreActor/]</h1>
+    </header>
+    <main>
+        <h2>Tarea final para el Workflow [aTFin.eContainer().oclAsType(Workflow).nombreWorkflow/]</h2>
+        <a href="index.html">Volver al inicio</a>
+		
+    </main>
+</body>
+</html>
+	[/file]
 [/template]
 
 [template public generateTEnvMensaje(aTEnviar : TEnvioM)]
@@ -225,8 +277,8 @@
         <fieldset>
             <legend>FORMULARIO</legend>
             <form action="">
-                <label for="campo-bd">Introduce el [aTConsulta.atributo.nombreId/] a buscar</label>
-                <input type="text" name="campo-[aTConsulta.atributo.nombreId/]" id="campo-[aTConsulta.atributo.nombreId/]">
+                <label for="campo-bd">Introduce el [aTConsulta.atributo.nombreAtributo/] a buscar</label>
+                <input type="text" name="campo-[aTConsulta.atributo.nombreAtributo/]" id="campo-[aTConsulta.atributo.nombreAtributo/]">
                 <button type="submit">Consultar</button>
             </form>
         </fieldset>
@@ -262,8 +314,8 @@
         <fieldset>
             <legend>FORMULARIO</legend>
             <form action="">
-                <label for="campo-bd">Introduce el [aTBorrado.atributo.nombreId/] a borrar</label>
-                <input type="text" name="campo-[aTBorrado.atributo.nombreId/]" id="campo-[aTBorrado.atributo.nombreId/]">
+                <label for="campo-bd">Introduce el [aTBorrado.atributo.nombreAtributo/] a borrar</label>
+                <input type="text" name="campo-[aTBorrado.atributo.nombreAtributo/]" id="campo-[aTBorrado.atributo.nombreAtributo/]">
                 <button type="submit">Consultar</button>
             </form>
         </fieldset>
@@ -279,7 +331,7 @@
 [/template]
 
 [template public generateResultCodSQLDelete(aTBorrado : TBorradoBD)]
-[file ('codSQLBorrado-'+aTBorrado.tabla.nombreTabla+'-'+aTBorrado.atributo.nombreId+'.html', false, 'UTF-8')]
+[file (aTBorrado.actor.nombreActor+'/codSQLBorrado-'+aTBorrado.tabla.nombreTabla+'-'+aTBorrado.atributo.nombreAtributo+'.html', false, 'UTF-8')]
 	<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -301,7 +353,7 @@
        
 INSERT INTO [aTBorrado.tabla.nombreTabla/] ([for (aColumn : Atributo | aTBorrado.tabla.atributo) separator (', ')][aColumn.nombreAtributo/][/for])
 VALUES (value1, value2, ...);
-        DELETE FROM [aTBorrado.tabla.nombreTabla/] WHERE [aTBorrado.atributo.nombreId/] = condition;
+        DELETE FROM [aTBorrado.tabla.nombreTabla/] WHERE [aTBorrado.atributo.nombreAtributo/] = condition;
    
 
 </body>
@@ -313,7 +365,7 @@ VALUES (value1, value2, ...);
 
 [template public generateResultCodSQLConsult(aTConsultaBD : TConsultaBD)]
 
-[file ('codSQLConsulta-'+aTConsultaBD.tabla.nombreTabla+'-'+aTConsultaBD.atributo.nombreId+'.html', false, 'UTF-8')]
+[file (aTConsultaBD.actor.nombreActor+'/codSQLConsulta-'+aTConsultaBD.tabla.nombreTabla+'-'+aTConsultaBD.atributo.nombreAtributo+'.html', false, 'UTF-8')]
 		<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -335,7 +387,7 @@ VALUES (value1, value2, ...);
        
 INSERT INTO [aTConsultaBD.tabla.nombreTabla/] ([for (aColumn : Atributo | aTConsultaBD.tabla.atributo) separator (', ')][aColumn.nombreAtributo/][/for])
 VALUES (value1, value2, ...);
-        DELETE FROM [aTConsultaBD.tabla.nombreTabla/] WHERE [aTConsultaBD.atributo.nombreId/] = condition;
+        DELETE FROM [aTConsultaBD.tabla.nombreTabla/] WHERE [aTConsultaBD.atributo.nombreAtributo/] = condition;
    
 
 </body>
@@ -484,8 +536,12 @@ form{
 
 [for (aTabla : Tabla | aWorkflow.basedatos.tabla)]
 CREATE TABLE [aTabla.nombreTabla/] (
-	[aTabla.identificador.nombreId/] INTEGER PRIMARY KEY,
+
 [for (attr : Atributo | aTabla.atributo)]
+	[if (attr.isPrimaryKey)]
+        [attr.nombreAtributo/] INTEGER PRIMARY KEY,	
+	[/if]
+	
     [if (attr.oclIsTypeOf(_'Boolean'))]
         [attr.nombreAtributo/] BOOLEAN NOT NULL,
 	[/if]
@@ -506,8 +562,8 @@ CREATE TABLE [aTabla.nombreTabla/] (
 [/for]
 
 [for (attr : Atributo | aTabla.atributo)]
-    [if (attr.oclIsTypeOf(ForeignKey))]
-        , FOREIGN KEY ([attr.oclAsType(ForeignKey).nombreAtributo/]) REFERENCES [attr.eContainer().oclAsType(Tabla).nombreTabla/]([attr.nombreAtributo/])
+    [if (attr.foreignKey <> null)]
+        , FOREIGN KEY ([attr.nombreAtributo/]) REFERENCES [attr.eContainer().oclAsType(Tabla).nombreTabla/]([attr.foreignKey.nombreAtributo/])
     [/if]
 [/for]
 );
