@@ -109,19 +109,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina enviar mensaje</title>
+    <title>Pagina [aTEnviar.eClass().name/]</title>
     <link rel="stylesheet" href="./../css/styles.css">
 </head>
 <body>
    <header>    
-        <h1>NOMBRE [aTEnviar.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>NOMBRE [aTEnviar.actor.nombreActor/]</h1>
+        <h1>[aTEnviar.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
+        <h1>[aTEnviar.actor.nombreActor/]</h1>
     </header>
 
     <main>
-        <form action="TEnvMensaje.html" method="GET">
+		[if (aTEnviar.tareaSiguiente <> null)]
+			<form action="[aTEnviar.tareaSiguiente.eClass().name/]_[aTEnviar.tareaSiguiente.nombreTarea/]_[aTEnviar.tareaSiguiente.actor.nombreActor/].html" method="GET">
+                
+		[else]
+			<form action="[aTEnviar.tfin.eClass().name/]_[aTEnviar.tfin.nombreFin/]_[aTEnviar.tfin.actor.nombreActor/].html" method="GET">
+                    
+		[/if]
             
-    
             <label for="textarea">Textarea:</label><br>
             <textarea id="textarea" name="textarea"></textarea><br>
     
@@ -149,8 +154,8 @@
 </head>
 <body>
     <header>    
-        <h1>NOMBRE [aTRecibirMensaje.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>NOMBRE [aTRecibirMensaje.actor.nombreActor/]</h1>
+        <h1>[aTRecibirMensaje.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
+        <h1>[aTRecibirMensaje.actor.nombreActor/]</h1>
     </header>
 
     <main>
@@ -181,12 +186,18 @@
 </head>
 <body>
     <header>    
-        <h1>NOMBRE [aTUsuario.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>NOMBRE [aTUsuario.actor.nombreActor/]</h1>
+        <h1>[aTUsuario.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
+        <h1>[aTUsuario.actor.nombreActor/]</h1>
     </header>
 
     <main>
-        <form action="TUsuario.html" method="GET">
+		[if (aTUsuario.tareaSiguiente <> null)]
+    		<form action="[aTUsuario.tareaSiguiente.eClass().name/]_[aTUsuario.tareaSiguiente.nombreTarea/]_[aTUsuario.tareaSiguiente.actor.nombreActor/].html" method="GET">
+        
+		[else]
+    		<form action="[aTUsuario.tfin.eClass().name/]_[aTUsuario.tfin.nombreFin/]_[aTUsuario.tfin.actor.nombreActor/].html" method="GET">
+        
+		[/if]
             <!-- Aquí comienzan los campos generados dinámicamente -->
             [for (atributo : Atributo |  aTUsuario.tabla.atributo)]
 				[if (atributo.oclIsTypeOf(_'String'))]
@@ -200,7 +211,7 @@
 				[/if]
                 [if (atributo.oclIsTypeOf(_'Float'))]
                     <label for="[atributo.nombreAtributo/]">[atributo.nombreAtributo/]:</label><br>
-                    <input type="number" id="[atributo.nombreAtributo/]" name="[atributo.nombreAtributo/]" step="0.01"><br>
+                    <input type="number" id="[atributo.nombreAtributo/]" name="[atributo.nombreAtributo/]" step="0.1"><br>
 				[/if]
 
                 [if (atributo.oclIsTypeOf(_'Date'))]
@@ -243,14 +254,20 @@
 </head>
 <body>
     <header>    
-        <h1>NOMBRE [aTServicio.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>NOMBRE [aTServicio.actor.nombreActor/]</h1>
+        <h1>[aTServicio.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
+        <h1>[aTServicio.actor.nombreActor/]</h1>
     </header>
 
     <main>
-        <button type="button" onclick="location.href='ejecutar_servicio.html';">Ejecutar Servicio</button>
-        <button type="button" onclick="location.href='[aTServicio.tareaSiguiente.nombreTarea/]+'.html'';">Siguiente</button>
-    </main>
+        <button type="button" onclick="">Ejecutar Servicio</button>
+		[if (aTServicio.tareaSiguiente <> null)]
+			<button type="button" onclick="[aTServicio.tareaSiguiente.eClass().name/]_[aTServicio.tareaSiguiente.nombreTarea/]_[aTServicio.tareaSiguiente.actor.nombreActor/].html">Siguiente</button>
+    
+		[else]
+			<button type="button" onclick="[aTServicio.tfin.eClass().name/]_[aTServicio.tfin.nombreFin/]_[aTServicio.tfin.actor.nombreActor/].html">Siguiente</button>
+    	
+		[/if]
+        </main>
 
 </body>
 </html>
@@ -270,21 +287,25 @@
 </head>
 <body>
     <header>    
-        <h1>NOMBRE [aTConsulta.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>NOMBRE [aTConsulta.actor.nombreActor/]</h1>
+        <h1>[aTConsulta.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
+        <h1>[aTConsulta.actor.nombreActor/]</h1>
     </header>
 
     <main>
         <fieldset>
             <legend>FORMULARIO</legend>
-            <form action="">
+            <form action="codSQLConsulta-[aTConsulta.tabla.nombreTabla/]-[aTConsulta.atributo.nombreAtributo/].html">
                 <label for="campo-bd">Introduce el [aTConsulta.atributo.nombreAtributo/] a buscar</label>
                 <input type="text" name="campo-[aTConsulta.atributo.nombreAtributo/]" id="campo-[aTConsulta.atributo.nombreAtributo/]">
                 <button type="submit">Consultar</button>
             </form>
         </fieldset>
-
-        <a href="http://" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
+[if (aTConsulta.tareaSiguiente <> null)]
+		<a href="[aTConsulta.tareaSiguiente.eClass().name/]_[aTConsulta.tareaSiguiente.nombreTarea/]_[aTConsulta.tareaSiguiente.actor.nombreActor/].html" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
+	[else]
+		<a href="[aTConsulta.tfin.eClass().name/]_[aTConsulta.tfin.nombreFin/]_[aTConsulta.tfin.actor.nombreActor/].html" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
+	
+	[/if]
     </main>
 
 </body>
@@ -308,21 +329,25 @@
 </head>
 <body>
     <header>    
-        <h1>NOMBRE [aTBorrado.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>NOMBRE [aTBorrado.actor.nombreActor/]</h1>
+        <h1>[aTBorrado.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
+        <h1>[aTBorrado.actor.nombreActor/]</h1>
     </header>
 
     <main>
         <fieldset>
             <legend>FORMULARIO</legend>
-            <form action="">
+            <form action="codSQLBorrado-[aTBorrado.tabla.nombreTabla/]-[aTBorrado.atributo.nombreAtributo/].html">
                 <label for="campo-bd">Introduce el [aTBorrado.atributo.nombreAtributo/] a borrar</label>
                 <input type="text" name="campo-[aTBorrado.atributo.nombreAtributo/]" id="campo-[aTBorrado.atributo.nombreAtributo/]">
                 <button type="submit">Consultar</button>
             </form>
         </fieldset>
-
-        <a href="http://" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
+		[if (aTBorrado.tareaSiguiente <> null)]
+		<a href="[aTBorrado.tareaSiguiente.eClass().name/]_[aTBorrado.tareaSiguiente.nombreTarea/]_[aTBorrado.tareaSiguiente.actor.nombreActor/].html" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
+	[else]
+		<a href="[aTBorrado.tfin.eClass().name/]_[aTBorrado.tfin.nombreFin/]_[aTBorrado.tfin.actor.nombreActor/].html" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
+	
+	[/if]
     </main>
 
 </body>
@@ -344,11 +369,16 @@
 </head>
 <body>
     <header>    
-        <h1>NOMBRE [aTBorrado.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>NOMBRE [aTBorrado.actor.nombreActor/]</h1>
+        <h1>[aTBorrado.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
+        <h1>[aTBorrado.actor.nombreActor/]</h1>
     </header>
-    <a href="http://" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
-
+	[if (aTBorrado.tareaSiguiente <> null)]
+		<a href="[aTBorrado.tareaSiguiente.eClass().name/]_[aTBorrado.tareaSiguiente.nombreTarea/]_[aTBorrado.tareaSiguiente.actor.nombreActor/].html" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
+	[else]
+		<a href="[aTBorrado.tfin.eClass().name/]_[aTBorrado.tfin.nombreFin/]_[aTBorrado.tfin.actor.nombreActor/].html" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
+	
+	[/if]
+    
     <p>A continuación se muestran los cuatro tipos de consultas SQL:</p> 
   
         SELECT * From [aTBorrado.tabla.nombreTabla/];
@@ -378,14 +408,18 @@ VALUES (value1, value2, ...);
 </head>
 <body>
     <header>    
-        <h1>NOMBRE [aTConsultaBD.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>NOMBRE [aTConsultaBD.actor.nombreActor/]</h1>
+        <h1>[aTConsultaBD.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
+        <h1>[aTConsultaBD.actor.nombreActor/]</h1>
     </header>
-    <a href="http://" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
-
+[if (aTConsultaBD.tareaSiguiente <> null)]
+		<a href="[aTConsultaBD.tareaSiguiente.eClass().name/]_[aTConsultaBD.tareaSiguiente.nombreTarea/]_[aTConsultaBD.tareaSiguiente.actor.nombreActor/].html" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
+	[else]
+		<a href="[aTConsultaBD.tfin.eClass().name/]_[aTConsultaBD.tfin.nombreFin/]_[aTConsultaBD.tfin.actor.nombreActor/].html" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
+	
+	[/if]
     <p>A continuación se muestran los cuatro tipos de consultas SQL:</p> 
   
-        SELECT * From [aTConsultaBD.tabla.nombreTabla/] WHERE [aTConsultaBD.atributo/] = condition;
+        SELECT * From [aTConsultaBD.tabla.nombreTabla/] WHERE [aTConsultaBD.atributo.nombreAtributo/] = condition;
        
 INSERT INTO [aTConsultaBD.tabla.nombreTabla/] ([for (aColumn : Atributo | aTConsultaBD.tabla.atributo) separator (', ')][aColumn.nombreAtributo/][/for])
 VALUES (value1, value2, ...);
