@@ -200,7 +200,7 @@
 		[/if]
             <!-- Aquí comienzan los campos generados dinámicamente -->
             [for (atributo : Atributo |  aTUsuario.tabla.atributo)]
-				[if (atributo.oclIsTypeOf(_'String'))]
+				[if (atributo.oclIsTypeOf(Cadena))]
                     <label for="[atributo.nombreAtributo/]">[atributo.nombreAtributo/]:</label><br>
                     <input type="text" id="[atributo.nombreAtributo/]" name="[atributo.nombreAtributo/]"><br>
 				[/if]
@@ -209,25 +209,25 @@
                     <label for="[atributo.nombreAtributo/]">[atributo.nombreAtributo/]:</label><br>
                     <input type="number" id="[atributo.nombreAtributo/]" name="[atributo.nombreAtributo/]"><br>
 				[/if]
-                [if (atributo.oclIsTypeOf(_'Float'))]
+                [if (atributo.oclIsTypeOf(Decimal))]
                     <label for="[atributo.nombreAtributo/]">[atributo.nombreAtributo/]:</label><br>
                     <input type="number" id="[atributo.nombreAtributo/]" name="[atributo.nombreAtributo/]" step="0.1"><br>
 				[/if]
 
-                [if (atributo.oclIsTypeOf(_'Date'))]
+                [if (atributo.oclIsTypeOf(Fecha))]
                     <label for="[atributo.nombreAtributo/]">[atributo.nombreAtributo/]:</label><br>
                     <input type="date" id="[atributo.nombreAtributo/]" name="[atributo.nombreAtributo/]"><br>
 				[/if]
 
-                [if (atributo.oclIsTypeOf(_'Boolean'))]
+                [if (atributo.oclIsTypeOf(Bool))]
                     <label for="[atributo.nombreAtributo/]">[atributo.nombreAtributo/]:</label>
                     <input type="checkbox" id="[atributo.nombreAtributo/]" name="[atributo.nombreAtributo/]"><br>
                 [/if]
 
-				[if (atributo.oclIsTypeOf(Pair))]
+				[if (atributo.oclIsTypeOf(Pareja))]
                     <label for="[atributo.nombreAtributo/]">[atributo.nombreAtributo/]:</label><br>
 				    <input type="number" id="[atributo.nombreAtributo/]" name="[atributo.nombreAtributo/]" 
-				    min="[atributo.oclAsType(Pair).minValue/]" max="[atributo.oclAsType(Pair).maxValue/]"><br>
+				    min="[atributo.oclAsType(Pareja).minValue/]" max="[atributo.oclAsType(Pareja).maxValue/]"><br>
                 [/if]
 
             [/for]    
@@ -573,22 +573,22 @@ form{
 [for (aTabla : Tabla | aWorkflow.basedatos.tabla)]
 CREATE TABLE [aTabla.nombreTabla/] (
 [for (attr : Atributo | aTabla.atributo) separator (', ')]
-    [if (attr.oclIsTypeOf(_'Boolean'))]
+    [if (attr.oclIsTypeOf(Bool))]
         [attr.nombreAtributo/] BOOLEAN NOT NULL [if (attr.isPrimaryKey)] PRIMARY KEY [/if] [if (attr.foreignKey <> null)] ,FOREIGN KEY ([attr.nombreAtributo/]) REFERENCES [attr.foreignKey.eContainer().oclAsType(Tabla).nombreTabla/]([attr.foreignKey.nombreAtributo/]) [/if]
 	[/if]
-    [if (attr.oclIsTypeOf(_'Float'))]
+    [if (attr.oclIsTypeOf(Decimal))]
         [attr.nombreAtributo/] FLOAT NOT NULL [if (attr.isPrimaryKey)] PRIMARY KEY [/if] [if (attr.foreignKey <> null)] ,FOREIGN KEY ([attr.nombreAtributo/]) REFERENCES [attr.foreignKey.eContainer().oclAsType(Tabla).nombreTabla/]([attr.foreignKey.nombreAtributo/]) [/if]
 	[/if]
     [if (attr.oclIsTypeOf(_'Integer'))]
         [attr.nombreAtributo/] INTEGER NOT NULL[if (attr.isPrimaryKey)] PRIMARY KEY[/if] [if (attr.foreignKey <> null)] ,FOREIGN KEY ([attr.nombreAtributo/]) REFERENCES [attr.foreignKey.eContainer().oclAsType(Tabla).nombreTabla/]([attr.foreignKey.nombreAtributo/]) [/if]
 	[/if]
-    [if (attr.oclIsTypeOf(_'String'))]
+    [if (attr.oclIsTypeOf(Cadena))]
         [attr.nombreAtributo/] VARCHAR(255) NOT NULL[if (attr.isPrimaryKey)] PRIMARY KEY[/if] [if (attr.foreignKey <> null)] ,FOREIGN KEY ([attr.nombreAtributo/]) REFERENCES [attr.foreignKey.eContainer().oclAsType(Tabla).nombreTabla/]([attr.foreignKey.nombreAtributo/]) [/if]
     [/if]
-	[if (attr.oclIsTypeOf(_'Date'))]
+	[if (attr.oclIsTypeOf(Fecha))]
         [attr.nombreAtributo/] DATE NOT NULL[if (attr.isPrimaryKey)] PRIMARY KEY[/if] [if (attr.foreignKey <> null)] ,FOREIGN KEY ([attr.nombreAtributo/]) REFERENCES [attr.foreignKey.eContainer().oclAsType(Tabla).nombreTabla/]([attr.foreignKey.nombreAtributo/]) [/if]
     [/if]
-	[if (attr.oclIsTypeOf(Pair))]
+	[if (attr.oclIsTypeOf(Pareja))]
         [attr.nombreAtributo/]_min INTEGER NOT NULL,
 		[attr.nombreAtributo/]_max INTEGER NOT NULL
     [/if]
@@ -599,18 +599,5 @@ CREATE TABLE [aTabla.nombreTabla/] (
 [/template]
 
 
-[template public nextTareaSameActor(aTarea : Tarea, aActor:Actor)]
-	[if (aTarea.tareaSiguiente <> null)]	
-		[if (aTarea.tareaSiguiente.actor = aActor)]
-			[aTarea.tareaSiguiente/]
-		[else]
-			[nextTareaSameActor(aTarea.tareaSiguiente, aActor)/]
-			
-		[/if]
-	[elseif (expression)]
-		
-	[/if]
-	
-	
-[/template]
+
 

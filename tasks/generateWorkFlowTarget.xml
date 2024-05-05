@@ -3,8 +3,8 @@
 <!-- Place this file in the target project and call it with "External Tools > Run As > Ant Build" -->
 <!-- You have to change the MODEL and the TARGET values -->
 
-<project basedir="." default="generateWorkFlowSample" name="Acceleo-MisWorkflowsSample">
-	<import file="../../Acceleo-MisWorkflows/tasks/generateWorkFlow.xml"/>
+<project basedir="." default="generateWorkFlowSample" name="org.eclipse.acceleo.module.MisWorkFlowsAccSample">
+	<import file="../../org.eclipse.acceleo.module.MisWorkFlowsAcc/tasks/generateWorkFlow.xml"/>
 
     <!-- Change the values of MODEL and TARGET to point to your model and output folder -->
 	<property name="MODEL" value="${basedir}/model/file.xmi"/>
