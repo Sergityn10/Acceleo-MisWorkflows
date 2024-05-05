@@ -607,3 +607,19 @@ CREATE TABLE [aTabla.nombreTabla/] (
 [/file]
 [/template]
 
+
+[template public nextTareaSameActor(aTarea : Tarea, aActor:Actor)]
+	[if (aTarea.tareaSiguiente <> null)]	
+		[if (aTarea.tareaSiguiente.actor = aActor)]
+			[aTarea.tareaSiguiente/]
+		[else]
+			[nextTareaSameActor(aTarea.tareaSiguiente, aActor)/]
+			
+		[/if]
+	[elseif (expression)]
+		
+	[/if]
+	
+	
+[/template]
+

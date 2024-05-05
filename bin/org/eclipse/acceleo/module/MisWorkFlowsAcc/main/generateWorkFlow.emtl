@@ -3197,6 +3197,80 @@
         <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Workflow"/>
       </parameter>
     </ownedModuleElement>
+    <ownedModuleElement xsi:type="mtl:Template" name="nextTareaSameActor" visibility="Public">
+      <body xsi:type="mtl:IfBlock">
+        <body xsi:type="mtl:IfBlock">
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;&#x9;"/>
+          <body xsi:type="ocl.ecore:PropertyCallExp">
+            <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tarea"/>
+            <source xsi:type="ocl.ecore:VariableExp" name="aTarea" referredVariable="/0/nextTareaSameActor/aTarea">
+              <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tarea"/>
+            </source>
+            <referredProperty xsi:type="ecore:EReference" href="http://www.example.org/proyectoWorkflow#//Tarea/tareaSiguiente"/>
+          </body>
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xD;&#xA;"/>
+          <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Actor"/>
+              <source xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tarea"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="aTarea" referredVariable="/0/nextTareaSameActor/aTarea">
+                  <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tarea"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="http://www.example.org/proyectoWorkflow#//Tarea/tareaSiguiente"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="http://www.example.org/proyectoWorkflow#//Tarea/actor"/>
+            </source>
+            <argument xsi:type="ocl.ecore:VariableExp" name="aActor" referredVariable="/0/nextTareaSameActor/aActor">
+              <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Actor"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+          </ifExpr>
+          <else>
+            <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;&#x9;"/>
+            <body xsi:type="mtl:TemplateInvocation" definition="/0/nextTareaSameActor">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <argument xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tarea"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="aTarea" referredVariable="/0/nextTareaSameActor/aTarea">
+                  <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tarea"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="http://www.example.org/proyectoWorkflow#//Tarea/tareaSiguiente"/>
+              </argument>
+              <argument xsi:type="ocl.ecore:VariableExp" name="aActor" referredVariable="/0/nextTareaSameActor/aActor">
+                <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Actor"/>
+              </argument>
+            </body>
+            <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;&#x9;&#x9;&#x9;&#xA;"/>
+          </else>
+        </body>
+        <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <source xsi:type="ocl.ecore:PropertyCallExp">
+            <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tarea"/>
+            <source xsi:type="ocl.ecore:VariableExp" name="aTarea" referredVariable="/0/nextTareaSameActor/aTarea">
+              <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tarea"/>
+            </source>
+            <referredProperty xsi:type="ecore:EReference" href="http://www.example.org/proyectoWorkflow#//Tarea/tareaSiguiente"/>
+          </source>
+          <argument xsi:type="ocl.ecore:NullLiteralExp">
+            <eType xsi:type="ocl.ecore:VoidType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"/>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/%3C%3E"/>
+        </ifExpr>
+        <elseIf>
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;&#xA;"/>
+        </elseIf>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#xD;&#xA;&#x9;"/>
+      <parameter name="aTarea">
+        <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tarea"/>
+      </parameter>
+      <parameter name="aActor">
+        <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Actor"/>
+      </parameter>
+    </ownedModuleElement>
   </mtl:Module>
   <ecore:EPackage name="additions">
     <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_String_Class">
@@ -3352,6 +3426,19 @@
           <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Workflow"/>
         </eParameters>
       </eOperations>
+      <eOperations name="nextTareaSameActor">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL" references="/0/nextTareaSameActor"/>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="aTarea">
+          <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tarea"/>
+        </eParameters>
+        <eParameters name="aActor">
+          <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Actor"/>
+        </eParameters>
+      </eOperations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_OclAny_Class">
       <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
@@ -3416,6 +3503,11 @@
     <eClassifiers xsi:type="ecore:EClass" name="proyectoWorkflow_TBorradoBD_Class">
       <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
         <references href="http://www.example.org/proyectoWorkflow#//TBorradoBD"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="proyectoWorkflow_Tarea_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.example.org/proyectoWorkflow#//Tarea"/>
       </eAnnotations>
     </eClassifiers>
   </ecore:EPackage>
@@ -4343,6 +4435,42 @@
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="i">
     <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tarea"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tarea"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tarea"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tarea"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tarea"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tarea"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tarea"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.example.org/proyectoWorkflow#//Tarea"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
@@ -9902,6 +10030,146 @@
       <details key="start" value="19263"/>
       <details key="end" value="19283"/>
       <details key="line" value="568"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1111" references="/0/nextTareaSameActor">
+      <details key="start" value="20365"/>
+      <details key="end" value="20675"/>
+      <details key="line" value="611"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1112" references="/0/nextTareaSameActor/%">
+      <details key="start" value="20434"/>
+      <details key="end" value="20658"/>
+      <details key="line" value="612"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1113" references="/0/nextTareaSameActor/%/%">
+      <details key="start" value="20474"/>
+      <details key="end" value="20624"/>
+      <details key="line" value="613"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1114" references="/0/nextTareaSameActor/%/%/%">
+      <details key="start" value="20518"/>
+      <details key="end" value="20521"/>
+      <details key="line" value="614"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1115" references="/0/nextTareaSameActor/%/%/%.1">
+      <details key="start" value="20522"/>
+      <details key="end" value="20543"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1116" references="/0/nextTareaSameActor/%/%/%.1/aTarea">
+      <details key="start" value="20522"/>
+      <details key="end" value="20528"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1117" references="/0/nextTareaSameActor/%/%/%.2">
+      <details key="start" value="20545"/>
+      <details key="end" value="20547"/>
+      <details key="line" value="615"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1118" references="/0/nextTareaSameActor/%/%/%.3">
+      <details key="start" value="20478"/>
+      <details key="end" value="20516"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1119" references="/0/nextTareaSameActor/%/%/%.3/%">
+      <details key="start" value="20479"/>
+      <details key="end" value="20506"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1120" references="/0/nextTareaSameActor/%/%/%.3/%/%">
+      <details key="start" value="20479"/>
+      <details key="end" value="20500"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1121" references="/0/nextTareaSameActor/%/%/%.3/%/%/aTarea">
+      <details key="start" value="20479"/>
+      <details key="end" value="20485"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1122" references="/0/nextTareaSameActor/%/%/%.3/aActor">
+      <details key="start" value="20509"/>
+      <details key="end" value="20515"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1123" references="/0/nextTareaSameActor/%/%/%.4">
+      <details key="start" value="20549"/>
+      <details key="end" value="20619"/>
+      <details key="line" value="615"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1124" references="/0/nextTareaSameActor/%/%/%.4/%">
+      <details key="start" value="20557"/>
+      <details key="end" value="20560"/>
+      <details key="line" value="616"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1125" references="/0/nextTareaSameActor/%/%/%.4/%.1">
+      <details key="start" value="20561"/>
+      <details key="end" value="20610"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1126" references="/0/nextTareaSameActor/%/%/%.4/%.1/%">
+      <details key="start" value="20580"/>
+      <details key="end" value="20601"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1127" references="/0/nextTareaSameActor/%/%/%.4/%.1/%/aTarea">
+      <details key="start" value="20580"/>
+      <details key="end" value="20586"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1128" references="/0/nextTareaSameActor/%/%/%.4/%.1/aActor">
+      <details key="start" value="20603"/>
+      <details key="end" value="20609"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1129" references="/0/nextTareaSameActor/%/%/%.4/%.2">
+      <details key="start" value="20612"/>
+      <details key="end" value="20617"/>
+      <details key="line" value="617"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1130" references="/0/nextTareaSameActor/%/%.1">
+      <details key="start" value="20438"/>
+      <details key="end" value="20469"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1131" references="/0/nextTareaSameActor/%/%.1/%">
+      <details key="start" value="20439"/>
+      <details key="end" value="20460"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1132" references="/0/nextTareaSameActor/%/%.1/%/aTarea">
+      <details key="start" value="20439"/>
+      <details key="end" value="20445"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1133" references="/0/nextTareaSameActor/%/%.1/%.1">
+      <details key="start" value="20464"/>
+      <details key="end" value="20468"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1134" references="/0/nextTareaSameActor/%/%.2">
+      <details key="start" value="20627"/>
+      <details key="end" value="20653"/>
+      <details key="line" value="619"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1135" references="/0/nextTareaSameActor/%/%.2/%">
+      <details key="start" value="20649"/>
+      <details key="end" value="20652"/>
+      <details key="line" value="620"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1136" references="/0/nextTareaSameActor/%.1">
+      <details key="start" value="20659"/>
+      <details key="end" value="20663"/>
+      <details key="line" value="622"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1137" references="/0/nextTareaSameActor/aTarea">
+      <details key="start" value="20401"/>
+      <details key="end" value="20415"/>
+      <details key="line" value="611"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1138" references="/0/nextTareaSameActor/aActor">
+      <details key="start" value="20417"/>
+      <details key="end" value="20429"/>
+      <details key="line" value="611"/>
     </eAnnotations>
   </ecore:EAnnotation>
 </xmi:XMI>
