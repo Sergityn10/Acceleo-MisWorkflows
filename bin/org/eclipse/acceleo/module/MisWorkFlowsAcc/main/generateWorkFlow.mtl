@@ -11,7 +11,7 @@
  */]
 [template public generateElement(aWorkflow : Workflow)]
 [comment @main /]
-[for (actor : Actor | aWorkflow.actor)]
+[for (actor : Actor | aWorkflow.actores)]
 [file (actor.nombreActor+'/index.html', false, 'UTF-8')]
 <!DOCTYPE html>
 <html lang="en">
@@ -29,15 +29,15 @@
     </header>
 
     <main>
-		[if (actor.TInicioActor <> null)]
-			<a href="[actor.TInicioActor.eClass().name/]_[actor.TInicioActor.nombreInicio/]_[actor.nombreActor/].html"> Tarea inicial</a>
+		[if (actor.actorTinicio <> null)]
+			<a href="[actor.actorTinicio.eClass().name/]_[actor.actorTinicio.nombreInicio/]_[actor.nombreActor/].html"> Tarea inicial</a>
 		[/if]
-        [for (aTarea : Tarea | actor.tareas)]
+        [for (aTarea : Tarea | actor.actorTareas)]
         	<a href="[aTarea.eClass().name/]_[aTarea.nombreTarea/]_[actor.nombreActor/].html">[aTarea.nombreTarea/]</a>
         [/for]
         
-      	[if (actor.TFinActor <> null)]
-			<a href="[actor.TFinActor.eClass().name/]_[actor.TFinActor.nombreFin/]_[actor.nombreActor/].html">Tarea final</a>
+      	[if (actor.actorTfin <> null)]
+			<a href="[actor.actorTfin.eClass().name/]_[actor.actorTfin.nombreFin/]_[actor.nombreActor/].html">Tarea final</a>
 		[/if]
         
     </main>
@@ -51,7 +51,7 @@
 
 [template public generateTInicio(aTInicio : TInicio)]
 	[comment @main /]
-	[file (aTInicio.actor.nombreActor+'/TInicio_'+aTInicio.nombreInicio+'_'+aTInicio.actor.nombreActor+'.html', false, 'UTF-8')]
+	[file (aTInicio.tinicioActor.nombreActor+'/TInicio_'+aTInicio.nombreInicio+'_'+aTInicio.tinicioActor.nombreActor+'.html', false, 'UTF-8')]
 		<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,11 +63,11 @@
 <body>
     <header>    
         <h1>[aTInicio.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>[aTInicio.actor.nombreActor/]</h1>
+        <h1>[aTInicio.tinicioActor.nombreActor/]</h1>
     </header>
     <main>
         <h2>Tarea de inicio para el Workflow NOM-WORKFLOW</h2>
-        <a href="[aTInicio.tarea.eClass().name/]_[aTInicio.tarea.nombreTarea/]_[aTInicio.actor.nombreActor/].html">Empezar workflow</a>
+        <a href="[aTInicio.tinicioTarea.eClass().name/]_[aTInicio.tinicioTarea.nombreTarea/]_[aTInicio.tinicioActor.nombreActor/].html">Empezar workflow</a>
 		
     </main>
 </body>
@@ -77,7 +77,7 @@
 
 [template public generateTFinal(aTFin : TFin)]
 	[comment @main /]
-	[file (aTFin.actor.nombreActor+'/TFin_'+aTFin.nombreFin+'_'+aTFin.actor.nombreActor+'.html', false, 'UTF-8')]
+	[file (aTFin.tfinActor.nombreActor+'/TFin_'+aTFin.nombreFin+'_'+aTFin.tfinActor.nombreActor+'.html', false, 'UTF-8')]
 		<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -89,7 +89,7 @@
 <body>
     <header>    
         <h1>[aTFin.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>[aTFin.actor.nombreActor/]</h1>
+        <h1>[aTFin.tfinActor.nombreActor/]</h1>
     </header>
     <main>
         <h2>Tarea final para el Workflow [aTFin.eContainer().oclAsType(Workflow).nombreWorkflow/]</h2>
@@ -103,7 +103,7 @@
 
 [template public generateTEnvMensaje(aTEnviar : TEnvioM)]
 	[comment @main /]
-	[file (aTEnviar.actor.nombreActor+'/'+aTEnviar.eClass().name+'_'+aTEnviar.nombreTarea+'_'+aTEnviar.actor.nombreActor+'.html', false, 'UTF-8')]
+	[file (aTEnviar.tareaActor.nombreActor+'/'+aTEnviar.eClass().name+'_'+aTEnviar.nombreTarea+'_'+aTEnviar.tareaActor.nombreActor+'.html', false, 'UTF-8')]
 		<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -115,15 +115,15 @@
 <body>
    <header>    
         <h1>[aTEnviar.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>[aTEnviar.actor.nombreActor/]</h1>
+        <h1>[aTEnviar.tareaActor.nombreActor/]</h1>
     </header>
 
     <main>
 		[if (aTEnviar.tareaSiguiente <> null)]
-			<form action="[aTEnviar.tareaSiguiente.eClass().name/]_[aTEnviar.tareaSiguiente.nombreTarea/]_[aTEnviar.tareaSiguiente.actor.nombreActor/].html" method="GET">
+			<form action="[aTEnviar.tareaSiguiente.eClass().name/]_[aTEnviar.tareaSiguiente.nombreTarea/]_[aTEnviar.tareaSiguiente.tareaActor.nombreActor/].html" method="GET">
                 
 		[else]
-			<form action="[aTEnviar.tfin.eClass().name/]_[aTEnviar.tfin.nombreFin/]_[aTEnviar.tfin.actor.nombreActor/].html" method="GET">
+			<form action="[aTEnviar.tareaTfin.eClass().name/]_[aTEnviar.tareaTfin.nombreFin/]_[aTEnviar.tareaTfin.tfinActor.nombreActor/].html" method="GET">
                     
 		[/if]
             
@@ -142,28 +142,28 @@
 
 [template public generateTRecibirMensaje(aTRecibirMensaje : TRecepcionM)]
 [comment @main /]
-	[file (aTRecibirMensaje.actor.nombreActor+'/'+aTRecibirMensaje.eClass().name+'_'+aTRecibirMensaje.nombreTarea+'_'+aTRecibirMensaje.actor.nombreActor+'.html', false, 'UTF-8')]
+	[file (aTRecibirMensaje.tareaActor.nombreActor+'/'+aTRecibirMensaje.eClass().name+'_'+aTRecibirMensaje.nombreTarea+'_'+aTRecibirMensaje.tareaActor.nombreActor+'.html', false, 'UTF-8')]
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina principal del [actor.nombreActor/]</title>
+    <title>Pagina recibir mensaje [aTRecibirMensaje.tareaActor.nombreActor/]</title>
     <link rel="stylesheet" href="./../css/styles.css">
 </head>
 <body>
     <header>    
         <h1>[aTRecibirMensaje.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>[aTRecibirMensaje.actor.nombreActor/]</h1>
+        <h1>[aTRecibirMensaje.tareaActor.nombreActor/]</h1>
     </header>
 
     <main>
 		
         [if (aTRecibirMensaje.tareaSiguiente <> null)]
         	<a href="[aTRecibirMensaje.tareaSiguiente.nombreTarea/].html">[aTRecibirMensaje.tareaSiguiente.nombreTarea/]</a>
-		[elseif (aTRecibirMensaje.tfin <> null)]
-			<a href="[aTRecibirMensaje.tfin.nombreFin/].html">[aTRecibirMensaje.tfin.nombreFin/]</a>
+		[elseif (aTRecibirMensaje.tareaTfin <> null)]
+			<a href="[aTRecibirMensaje.tareaTfin.nombreFin/].html">[aTRecibirMensaje.tareaTfin.nombreFin/]</a>
         [/if]
 
         
@@ -175,7 +175,7 @@
 
 [template public generateTUsuario(aTUsuario: TUsuario)]
 [comment @main/]
-[file (aTUsuario.actor.nombreActor+'/'+aTUsuario.eClass().name+'_'+aTUsuario.nombreTarea+'_'+aTUsuario.actor.nombreActor+'.html', false, 'UTF-8')]
+[file (aTUsuario.tareaActor.nombreActor+'/'+aTUsuario.eClass().name+'_'+aTUsuario.nombreTarea+'_'+aTUsuario.tareaActor.nombreActor+'.html', false, 'UTF-8')]
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -187,19 +187,19 @@
 <body>
     <header>    
         <h1>[aTUsuario.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>[aTUsuario.actor.nombreActor/]</h1>
+        <h1>[aTUsuario.tareaActor.nombreActor/]</h1>
     </header>
 
     <main>
 		[if (aTUsuario.tareaSiguiente <> null)]
-    		<form action="[aTUsuario.tareaSiguiente.eClass().name/]_[aTUsuario.tareaSiguiente.nombreTarea/]_[aTUsuario.tareaSiguiente.actor.nombreActor/].html" method="GET">
+    		<form action="[aTUsuario.tareaSiguiente.eClass().name/]_[aTUsuario.tareaSiguiente.nombreTarea/]_[aTUsuario.tareaSiguiente.tareaActor.nombreActor/].html" method="GET">
         
 		[else]
-    		<form action="[aTUsuario.tfin.eClass().name/]_[aTUsuario.tfin.nombreFin/]_[aTUsuario.tfin.actor.nombreActor/].html" method="GET">
+    		<form action="[aTUsuario.tareaTfin.eClass().name/]_[aTUsuario.tareaTfin.nombreFin/]_[aTUsuario.tareaTfin.tfinActor.nombreActor/].html" method="GET">
         
 		[/if]
             <!-- Aquí comienzan los campos generados dinámicamente -->
-            [for (atributo : Atributo |  aTUsuario.tabla.atributo)]
+            [for (atributo : Atributo |  aTUsuario.tareaTabla.atributos)]
 				[if (atributo.oclIsTypeOf(Cadena))]
                     <label for="[atributo.nombreAtributo/]">[atributo.nombreAtributo/]:</label><br>
                     <input type="text" id="[atributo.nombreAtributo/]" name="[atributo.nombreAtributo/]"><br>
@@ -243,7 +243,7 @@
 [template public generateTService(aTServicio: TServicio)]
 [comment @main/]
 
-[file (aTServicio.actor.nombreActor+'/'+aTServicio.eClass().name+'_'+aTServicio.nombreTarea+'_'+aTServicio.actor.nombreActor+'.html', false, 'UTF-8')]
+[file (aTServicio.tareaActor.nombreActor+'/'+aTServicio.eClass().name+'_'+aTServicio.nombreTarea+'_'+aTServicio.tareaActor.nombreActor+'.html', false, 'UTF-8')]
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -255,16 +255,16 @@
 <body>
     <header>    
         <h1>[aTServicio.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>[aTServicio.actor.nombreActor/]</h1>
+        <h1>[aTServicio.tareaActor.nombreActor/]</h1>
     </header>
 
     <main>
         <button type="button" onclick="">Ejecutar Servicio</button>
 		[if (aTServicio.tareaSiguiente <> null)]
-			<button type="button" onclick="[aTServicio.tareaSiguiente.eClass().name/]_[aTServicio.tareaSiguiente.nombreTarea/]_[aTServicio.tareaSiguiente.actor.nombreActor/].html">Siguiente</button>
+			<button type="button" onclick="[aTServicio.tareaSiguiente.eClass().name/]_[aTServicio.tareaSiguiente.nombreTarea/]_[aTServicio.tareaSiguiente.tareaActor.nombreActor/].html">Siguiente</button>
     
 		[else]
-			<button type="button" onclick="[aTServicio.tfin.eClass().name/]_[aTServicio.tfin.nombreFin/]_[aTServicio.tfin.actor.nombreActor/].html">Siguiente</button>
+			<button type="button" onclick="[aTServicio.tareaTfin.eClass().name/]_[aTServicio.tareaTfin.nombreFin/]_[aTServicio.tareaTfin.tfinActor.nombreActor/].html">Siguiente</button>
     	
 		[/if]
         </main>
@@ -276,7 +276,7 @@
 
 [template public generateTConsultaBD(aTConsulta: TConsultaBD)]
 [comment @main/]
-[file (aTConsulta.actor.nombreActor+'/'+aTConsulta.eClass().name+'_'+aTConsulta.nombreTarea+'_'+aTConsulta.actor.nombreActor+'.html', false, 'UTF-8')]
+[file (aTConsulta.tareaActor.nombreActor+'/'+aTConsulta.eClass().name+'_'+aTConsulta.nombreTarea+'_'+aTConsulta.tareaActor.nombreActor+'.html', false, 'UTF-8')]
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -288,22 +288,22 @@
 <body>
     <header>    
         <h1>[aTConsulta.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>[aTConsulta.actor.nombreActor/]</h1>
+        <h1>[aTConsulta.tareaActor.nombreActor/]</h1>
     </header>
 
     <main>
         <fieldset>
             <legend>FORMULARIO</legend>
-            <form action="codSQLConsulta-[aTConsulta.tabla.nombreTabla/]-[aTConsulta.atributo.nombreAtributo/].html">
-                <label for="campo-bd">Introduce el [aTConsulta.atributo.nombreAtributo/] a buscar</label>
-                <input type="text" name="campo-[aTConsulta.atributo.nombreAtributo/]" id="campo-[aTConsulta.atributo.nombreAtributo/]">
+            <form action="codSQLConsulta-[aTConsulta.tareaTabla.nombreTabla/]-[aTConsulta.tconsultabdAtributo.nombreAtributo/].html">
+                <label for="campo-bd">Introduce el [aTConsulta.tconsultabdAtributo.nombreAtributo/] a buscar</label>
+                <input type="text" name="campo-[aTConsulta.tconsultabdAtributo.nombreAtributo/]" id="camaTConsulta.tconsultabdAtributoutos.nombreAtributo/]">
                 <button type="submit">Consultar</button>
             </form>
         </fieldset>
 [if (aTConsulta.tareaSiguiente <> null)]
-		<a href="[aTConsulta.tareaSiguiente.eClass().name/]_[aTConsulta.tareaSiguiente.nombreTarea/]_[aTConsulta.tareaSiguiente.actor.nombreActor/].html" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
+		<a href="[aTConsulta.tareaSiguiente.eClass().name/]_[aTConsulta.tareaSiguiente.nombreTarea/]_[aTConsulta.tareaSiguiente.tareaActor.nombreActor/].html" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
 	[else]
-		<a href="[aTConsulta.tfin.eClass().name/]_[aTConsulta.tfin.nombreFin/]_[aTConsulta.tfin.actor.nombreActor/].html" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
+		<a href="[aTConsulta.tareaTfin.eClass().name/]_[aTConsulta.tareaTfin.nombreFin/]_[aTConsulta.tareaTfin.tfinActor.nombreActor/].html" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
 	
 	[/if]
     </main>
@@ -318,7 +318,7 @@
 [template public generateTBorradoBD(aTBorrado: TBorradoBD)]
 [comment @main/]
 
-[file (aTBorrado.actor.nombreActor+'/'+aTBorrado.eClass().name+'_'+aTBorrado.nombreTarea+'_'+aTBorrado.actor.nombreActor+'.html', false, 'UTF-8')]
+[file (aTBorrado.tareaActor.nombreActor+'/'+aTBorrado.eClass().name+'_'+aTBorrado.nombreTarea+'_'+aTBorrado.tareaActor.nombreActor+'.html', false, 'UTF-8')]
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -330,22 +330,22 @@
 <body>
     <header>    
         <h1>[aTBorrado.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>[aTBorrado.actor.nombreActor/]</h1>
+        <h1>[aTBorrado.tareaActor.nombreActor/]</h1>
     </header>
 
     <main>
         <fieldset>
             <legend>FORMULARIO</legend>
-            <form action="codSQLBorrado-[aTBorrado.tabla.nombreTabla/]-[aTBorrado.atributo.nombreAtributo/].html">
-                <label for="campo-bd">Introduce el [aTBorrado.atributo.nombreAtributo/] a borrar</label>
-                <input type="text" name="campo-[aTBorrado.atributo.nombreAtributo/]" id="campo-[aTBorrado.atributo.nombreAtributo/]">
+            <form action="codSQLBorrado-[aTBorrado.tareaTabla.nombreTabla/]-[aTBorrado.tborradobdAtributo.nombreAtributo/].html">
+                <label for="campo-bd">Introduce el [aTBorrado.tborradobdAtributo.nombreAtributo/] a borrar</label>
+                <input type="text" name="campo-[aTBorrado.tborradobdAtributo.nombreAtributo/]" id="campo-[aTBorrado.tborradobdAtributo.nombreAtributo/]">
                 <button type="submit">Consultar</button>
             </form>
         </fieldset>
 		[if (aTBorrado.tareaSiguiente <> null)]
-		<a href="[aTBorrado.tareaSiguiente.eClass().name/]_[aTBorrado.tareaSiguiente.nombreTarea/]_[aTBorrado.tareaSiguiente.actor.nombreActor/].html" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
+		<a href="[aTBorrado.tareaSiguiente.eClass().name/]_[aTBorrado.tareaSiguiente.nombreTarea/]_[aTBorrado.tareaSiguiente.tareaActor.nombreActor/].html" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
 	[else]
-		<a href="[aTBorrado.tfin.eClass().name/]_[aTBorrado.tfin.nombreFin/]_[aTBorrado.tfin.actor.nombreActor/].html" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
+		<a href="[aTBorrado.tareaTfin.eClass().name/]_[aTBorrado.tareaTfin.nombreFin/]_[aTBorrado.tareaTfin.tfinActor.nombreActor/].html" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
 	
 	[/if]
     </main>
@@ -358,7 +358,7 @@
 [/template]
 
 [template public generateResultCodSQLDelete(aTBorrado : TBorradoBD)]
-[file (aTBorrado.actor.nombreActor+'/codSQLBorrado-'+aTBorrado.tabla.nombreTabla+'-'+aTBorrado.atributo.nombreAtributo+'.html', false, 'UTF-8')]
+[file (aTBorrado.tareaActor.nombreActor+'/codSQLBorrado-'+aTBorrado.tareaTabla.nombreTabla+'-'+aTBorrado.tborradobdAtributo.nombreAtributo+'.html', false, 'UTF-8')]
 	<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -370,22 +370,22 @@
 <body>
     <header>    
         <h1>[aTBorrado.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>[aTBorrado.actor.nombreActor/]</h1>
+        <h1>[aTBorrado.tareaActor.nombreActor/]</h1>
     </header>
 	[if (aTBorrado.tareaSiguiente <> null)]
-		<a href="[aTBorrado.tareaSiguiente.eClass().name/]_[aTBorrado.tareaSiguiente.nombreTarea/]_[aTBorrado.tareaSiguiente.actor.nombreActor/].html" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
+		<a href="[aTBorrado.tareaSiguiente.eClass().name/]_[aTBorrado.tareaSiguiente.nombreTarea/]_[aTBorrado.tareaSiguiente.tareaActor.nombreActor/].html" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
 	[else]
-		<a href="[aTBorrado.tfin.eClass().name/]_[aTBorrado.tfin.nombreFin/]_[aTBorrado.tfin.actor.nombreActor/].html" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
+		<a href="[aTBorrado.tareaTfin.eClass().name/]_[aTBorrado.tareaTfin.nombreFin/]_[aTBorrado.tareaTfin.tfinActor.nombreActor/].html" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
 	
 	[/if]
     
     <p>A continuación se muestran los cuatro tipos de consultas SQL:</p> 
   
-        SELECT * From [aTBorrado.tabla.nombreTabla/];
+        SELECT * From [aTBorrado.tareaTabla.nombreTabla/];
        
-INSERT INTO [aTBorrado.tabla.nombreTabla/] ([for (aColumn : Atributo | aTBorrado.tabla.atributo) separator (', ')][aColumn.nombreAtributo/][/for])
+INSERT INTO [aTBorrado.tareaTabla.nombreTabla/] ([for (aColumn : Atributo | aTBorrado.tareaTabla.atributos) separator (', ')][aColumn.nombreAtributo/][/for])
 VALUES (value1, value2, ...);
-        DELETE FROM [aTBorrado.tabla.nombreTabla/] WHERE [aTBorrado.atributo.nombreAtributo/] = condition;
+        DELETE FROM [aTBorrado.tareaTabla.nombreTabla/] WHERE [aTBorrado.tborradobdAtributo.nombreAtributo/] = condition;
    
 
 </body>
@@ -397,7 +397,7 @@ VALUES (value1, value2, ...);
 
 [template public generateResultCodSQLConsult(aTConsultaBD : TConsultaBD)]
 
-[file (aTConsultaBD.actor.nombreActor+'/codSQLConsulta-'+aTConsultaBD.tabla.nombreTabla+'-'+aTConsultaBD.atributo.nombreAtributo+'.html', false, 'UTF-8')]
+[file (aTConsultaBD.tareaActor.nombreActor+'/codSQLConsulta-'+aTConsultaBD.tareaTabla.nombreTabla+'-'+aTConsultaBD.tconsultabdAtributo.nombreAtributo+'.html', false, 'UTF-8')]
 		<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -409,21 +409,21 @@ VALUES (value1, value2, ...);
 <body>
     <header>    
         <h1>[aTConsultaBD.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>[aTConsultaBD.actor.nombreActor/]</h1>
+        <h1>[aTConsultaBD.tareaActor.nombreActor/]</h1>
     </header>
 [if (aTConsultaBD.tareaSiguiente <> null)]
-		<a href="[aTConsultaBD.tareaSiguiente.eClass().name/]_[aTConsultaBD.tareaSiguiente.nombreTarea/]_[aTConsultaBD.tareaSiguiente.actor.nombreActor/].html" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
+		<a href="[aTConsultaBD.tareaSiguiente.eClass().name/]_[aTConsultaBD.tareaSiguiente.nombreTarea/]_[aTConsultaBD.tareaSiguiente.tareaActor.nombreActor/].html" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
 	[else]
-		<a href="[aTConsultaBD.tfin.eClass().name/]_[aTConsultaBD.tfin.nombreFin/]_[aTConsultaBD.tfin.actor.nombreActor/].html" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
+		<a href="[aTConsultaBD.tareaTfin.eClass().name/]_[aTConsultaBD.tareaTfin.nombreFin/]_[aTConsultaBD.tareaTfin.tfinActor.nombreActor/].html" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
 	
 	[/if]
     <p>A continuación se muestran los cuatro tipos de consultas SQL:</p> 
   
-        SELECT * From [aTConsultaBD.tabla.nombreTabla/] WHERE [aTConsultaBD.atributo.nombreAtributo/] = condition;
+        SELECT * From [aTConsultaBD.tareaTabla.nombreTabla/] WHERE [aTConsultaBD.tconsultabdAtributo.nombreAtributo/] = condition;
        
-INSERT INTO [aTConsultaBD.tabla.nombreTabla/] ([for (aColumn : Atributo | aTConsultaBD.tabla.atributo) separator (', ')][aColumn.nombreAtributo/][/for])
+INSERT INTO [aTConsultaBD.tareaTabla.nombreTabla/] ([for (aColumn : Atributo | aTConsultaBD.tareaTabla.atributos) separator (', ')][aColumn.nombreAtributo/][/for])
 VALUES (value1, value2, ...);
-        DELETE FROM [aTConsultaBD.tabla.nombreTabla/] WHERE [aTConsultaBD.atributo.nombreAtributo/] = condition;
+        DELETE FROM [aTConsultaBD.tareaTabla.nombreTabla/] WHERE [aTConsultaBD.tconsultabdAtributo.nombreAtributo/] = condition;
    
 
 </body>
@@ -570,9 +570,9 @@ form{
 
 [file ('sqlScript.sql', false, 'UTF-8')]
 
-[for (aTabla : Tabla | aWorkflow.basedatos.tabla)]
+[for (aTabla : Tabla | aWorkflow.basedatos.tablas)]
 CREATE TABLE [aTabla.nombreTabla/] (
-[for (attr : Atributo | aTabla.atributo) separator (', ')]
+[for (attr : Atributo | aTabla.atributos) separator (', ')]
     [if (attr.oclIsTypeOf(Bool))]
         [attr.nombreAtributo/] BOOLEAN NOT NULL [if (attr.isPrimaryKey)] PRIMARY KEY [/if] [if (attr.foreignKey <> null)] ,FOREIGN KEY ([attr.nombreAtributo/]) REFERENCES [attr.foreignKey.eContainer().oclAsType(Tabla).nombreTabla/]([attr.foreignKey.nombreAtributo/]) [/if]
 	[/if]
