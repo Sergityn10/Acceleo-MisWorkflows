@@ -123,7 +123,7 @@
 			<form action="[aTEnviar.tareaSiguiente.eClass().name/]_[aTEnviar.tareaSiguiente.nombreTarea/]_[aTEnviar.tareaSiguiente.tareaActor.nombreActor/].html" method="GET">
                 
 		[else]
-			<form action="[aTEnviar.tareaTfin.eClass().name/]_[aTEnviar.tareaTfin.nombreFin/]_[aTEnviar.tareaTfin.tfinActor.nombreActor/].html" method="GET">
+			<form action="index.html" method="GET">
                     
 		[/if]
             
@@ -161,9 +161,9 @@
     <main>
 		
         [if (aTRecibirMensaje.tareaSiguiente <> null)]
-        	<a href="[aTRecibirMensaje.tareaSiguiente.nombreTarea/].html">[aTRecibirMensaje.tareaSiguiente.nombreTarea/]</a>
+        	<a href="[aTRecibirMensaje.tareaSiguiente.eClass().name/]_[aTRecibirMensaje.tareaSiguiente.nombreTarea/]_[aTRecibirMensaje.tareaActor.nombreActor/].html">[aTRecibirMensaje.tareaSiguiente.nombreTarea/]</a>
 		[elseif (aTRecibirMensaje.tareaTfin <> null)]
-			<a href="[aTRecibirMensaje.tareaTfin.nombreFin/].html">[aTRecibirMensaje.tareaTfin.nombreFin/]</a>
+			<a href="[aTRecibirMensaje.tareaSiguiente.eClass().name/]_[aTRecibirMensaje.tareaTfin.nombreFin/]_[aTRecibirMensaje.tareaActor.nombreActor/].html">[aTRecibirMensaje.tareaTfin.nombreFin/]</a>
         [/if]
 
         
@@ -579,7 +579,7 @@ CREATE TABLE [aTabla.nombreTabla/] (
     [if (attr.oclIsTypeOf(Decimal))]
         [attr.nombreAtributo/] FLOAT NOT NULL [if (attr.isPrimaryKey)] PRIMARY KEY [/if] [if (attr.foreignKey <> null)] ,FOREIGN KEY ([attr.nombreAtributo/]) REFERENCES [attr.foreignKey.eContainer().oclAsType(Tabla).nombreTabla/]([attr.foreignKey.nombreAtributo/]) [/if]
 	[/if]
-    [if (attr.oclIsTypeOf(_'Integer'))]
+    [if (attr.oclIsTypeOf(Entero))]
         [attr.nombreAtributo/] INTEGER NOT NULL[if (attr.isPrimaryKey)] PRIMARY KEY[/if] [if (attr.foreignKey <> null)] ,FOREIGN KEY ([attr.nombreAtributo/]) REFERENCES [attr.foreignKey.eContainer().oclAsType(Tabla).nombreTabla/]([attr.foreignKey.nombreAtributo/]) [/if]
 	[/if]
     [if (attr.oclIsTypeOf(Cadena))]
