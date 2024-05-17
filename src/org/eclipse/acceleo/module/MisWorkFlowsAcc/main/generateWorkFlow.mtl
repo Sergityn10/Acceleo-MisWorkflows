@@ -24,15 +24,16 @@
 </head>
 <body>
     <header>    
-        <h1>[aWorkflow.nombreWorkflow/]</h1>
-        <h1>[actor.nombreActor/]</h1>
+        <h1>Nombre del Workflow: [aWorkflow.nombreWorkflow/]</h1>
+        <h1>Actor: [actor.nombreActor/]</h1>
+		<h2> Pagina principal de [actor.nombreActor/]</h2>
     </header>
 
     <main>
 		[if (actor.actorTinicio <> null)]
 			<a href="[actor.actorTinicio.eClass().name/]_[actor.actorTinicio.nombreInicio/]_[actor.nombreActor/].html"> Tarea inicial</a>
 		[/if]
-        [for (aTarea : Tarea | actor.actorTareas)]
+        [for (aTarea : Tarea | actor.actorTareas->selectByType(TRecepcionM))]
         	<a href="[aTarea.eClass().name/]_[aTarea.nombreTarea/]_[actor.nombreActor/].html">[aTarea.nombreTarea/]</a>
         [/for]
         
@@ -47,6 +48,17 @@
 
 [/for]
 [generateCSS()/]
+
+
+
+[/template]
+
+[template public generateHeaderTareas(aTarea : Tarea)]		
+	<header>    
+        <h1>Nombre del Workflow: [aTarea.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
+        <h1>Actor:  [aTarea.tareaActor.nombreActor/]</h1>
+		<h2>[aTarea.eClass().name/] : [aTarea.nombreTarea/]</h2>
+    </header>
 [/template]
 
 [template public generateTInicio(aTInicio : TInicio)]
@@ -62,8 +74,9 @@
 </head>
 <body>
     <header>    
-        <h1>[aTInicio.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>[aTInicio.tinicioActor.nombreActor/]</h1>
+        <h1>Nombre del Workflow: [aTInicio.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
+        <h1>Actor:  [aTInicio.tinicioActor.nombreActor/]</h1>
+		<h2>Tarea de inicio:  [aTInicio.nombreInicio/]</h2>
     </header>
     <main>
         <h2>Tarea de inicio para el Workflow NOM-WORKFLOW</h2>
@@ -88,8 +101,9 @@
 </head>
 <body>
     <header>    
-        <h1>[aTFin.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>[aTFin.tfinActor.nombreActor/]</h1>
+        <h1>Nombre del Workflow: [aTFin.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
+        <h1>Actor: [aTFin.tfinActor.nombreActor/]</h1>
+		<h2>Tarea Final:  [aTFin.nombreFin/]</h2>
     </header>
     <main>
         <h2>Tarea final para el Workflow [aTFin.eContainer().oclAsType(Workflow).nombreWorkflow/]</h2>
@@ -99,6 +113,12 @@
 </body>
 </html>
 	[/file]
+[/template]
+
+[template public mostrarAtributosTablaBD(aTablaBD : Tabla)]
+	[for (aAtributo : Atributo | aTablaBD.atributos)]
+		<p> <b>[aAtributo.eClass().name/]</b>: [aAtributo.nombreAtributo/] </p>
+	[/for]
 [/template]
 
 [template public generateTEnvMensaje(aTEnviar : TEnvioM)]
@@ -113,12 +133,10 @@
     <link rel="stylesheet" href="./../css/styles.css">
 </head>
 <body>
-   <header>    
-        <h1>[aTEnviar.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>[aTEnviar.tareaActor.nombreActor/]</h1>
-    </header>
+   [generateHeaderTareas(aTEnviar)/]
 
     <main>
+
 			<form action="index.html" method="GET">
                     
             
@@ -127,6 +145,10 @@
     
             <input type="submit" value="Enviar">
         </form>
+		<section>
+			<h1>DATOS QUE SE VAN A ENVIAR</h1>
+			[mostrarAtributosTablaBD(aTEnviar.tareaTabla)/]
+		</section>
     </main>
 
 
@@ -148,10 +170,7 @@
     <link rel="stylesheet" href="./../css/styles.css">
 </head>
 <body>
-    <header>    
-        <h1>[aTRecibirMensaje.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>[aTRecibirMensaje.tareaActor.nombreActor/]</h1>
-    </header>
+   [generateHeaderTareas(aTRecibirMensaje)/]
 
     <main>
 		
@@ -161,7 +180,10 @@
 			<a href="[aTRecibirMensaje.tareaSiguiente.eClass().name/]_[aTRecibirMensaje.tareaTfin.nombreFin/]_[aTRecibirMensaje.tareaActor.nombreActor/].html">[aTRecibirMensaje.tareaTfin.nombreFin/]</a>
         [/if]
 
-        
+        <section>
+			<h1>DATOS QUE SE VAN A RECIBIR</h1>
+			[mostrarAtributosTablaBD(aTRecibirMensaje.tareaTabla)/]
+		</section>
     </main>
 </body>
 </html>
@@ -180,10 +202,7 @@
     <link rel="stylesheet" href="./../css/styles.css">
 </head>
 <body>
-    <header>    
-        <h1>[aTUsuario.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>[aTUsuario.tareaActor.nombreActor/]</h1>
-    </header>
+    [generateHeaderTareas(aTUsuario)/]
 
     <main>
 		[if (aTUsuario.tareaSiguiente <> null)]
@@ -248,18 +267,15 @@
     <link rel="stylesheet" href="./../css/styles.css">
 </head>
 <body>
-    <header>    
-        <h1>[aTServicio.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>[aTServicio.tareaActor.nombreActor/]</h1>
-    </header>
+    [generateHeaderTareas(aTServicio)/]
 
     <main>
         <button type="button" onclick="">Ejecutar Servicio</button>
 		[if (aTServicio.tareaSiguiente <> null)]
-			<button type="button" onclick="[aTServicio.tareaSiguiente.eClass().name/]_[aTServicio.tareaSiguiente.nombreTarea/]_[aTServicio.tareaSiguiente.tareaActor.nombreActor/].html">Siguiente</button>
+			<a type="button" href="[aTServicio.tareaSiguiente.eClass().name/]_[aTServicio.tareaSiguiente.nombreTarea/]_[aTServicio.tareaSiguiente.tareaActor.nombreActor/].html">Siguiente</a>
     
 		[else]
-			<button type="button" onclick="[aTServicio.tareaTfin.eClass().name/]_[aTServicio.tareaTfin.nombreFin/]_[aTServicio.tareaTfin.tfinActor.nombreActor/].html">Siguiente</button>
+			<a type="submit" href="[aTServicio.tareaTfin.eClass().name/]_[aTServicio.tareaTfin.nombreFin/]_[aTServicio.tareaTfin.tfinActor.nombreActor/].html">Siguiente</a>
     	
 		[/if]
         </main>
@@ -281,10 +297,7 @@
     <link rel="stylesheet" href="./../css/styles.css">
 </head>
 <body>
-    <header>    
-        <h1>[aTConsulta.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>[aTConsulta.tareaActor.nombreActor/]</h1>
-    </header>
+   [generateHeaderTareas(aTConsulta)/]
 
     <main>
         <fieldset>
@@ -323,10 +336,7 @@
     <link rel="stylesheet" href="./../css/styles.css">
 </head>
 <body>
-    <header>    
-        <h1>[aTBorrado.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>[aTBorrado.tareaActor.nombreActor/]</h1>
-    </header>
+    [generateHeaderTareas(aTBorrado)/]
 
     <main>
         <fieldset>
@@ -363,10 +373,7 @@
     <link rel="stylesheet" href="./../css/styles.css">
 </head>
 <body>
-    <header>    
-        <h1>[aTBorrado.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>[aTBorrado.tareaActor.nombreActor/]</h1>
-    </header>
+    [generateHeaderTareas(aTBorrado)/]
 	[if (aTBorrado.tareaSiguiente <> null)]
 		<a href="[aTBorrado.tareaSiguiente.eClass().name/]_[aTBorrado.tareaSiguiente.nombreTarea/]_[aTBorrado.tareaSiguiente.tareaActor.nombreActor/].html" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
 	[else]
@@ -374,12 +381,8 @@
 	
 	[/if]
     
-    <p>A continuación se muestran los cuatro tipos de consultas SQL:</p> 
+    <p>A continuación se muestran la operacion SQL:</p> 
   
-        SELECT * From [aTBorrado.tareaTabla.nombreTabla/];
-       
-INSERT INTO [aTBorrado.tareaTabla.nombreTabla/] ([for (aColumn : Atributo | aTBorrado.tareaTabla.atributos) separator (', ')][aColumn.nombreAtributo/][/for])
-VALUES (value1, value2, ...);
         DELETE FROM [aTBorrado.tareaTabla.nombreTabla/] WHERE [aTBorrado.tborradobdAtributo.nombreAtributo/] = condition;
    
 
@@ -402,23 +405,17 @@ VALUES (value1, value2, ...);
     <link rel="stylesheet" href="./../css/styles.css">
 </head>
 <body>
-    <header>    
-        <h1>[aTConsultaBD.eContainer().oclAsType(Workflow).nombreWorkflow/]</h1>
-        <h1>[aTConsultaBD.tareaActor.nombreActor/]</h1>
-    </header>
+    [generateHeaderTareas(aTConsultaBD)/]
 [if (aTConsultaBD.tareaSiguiente <> null)]
 		<a href="[aTConsultaBD.tareaSiguiente.eClass().name/]_[aTConsultaBD.tareaSiguiente.nombreTarea/]_[aTConsultaBD.tareaSiguiente.tareaActor.nombreActor/].html" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
 	[else]
 		<a href="[aTConsultaBD.tareaTfin.eClass().name/]_[aTConsultaBD.tareaTfin.nombreFin/]_[aTConsultaBD.tareaTfin.tfinActor.nombreActor/].html" class="button-siguiente" target="_blank" rel="noopener noreferrer">Siguiente</a>
 	
 	[/if]
-    <p>A continuación se muestran los cuatro tipos de consultas SQL:</p> 
+    <p>A continuación se muestra la operacion SQL:</p> 
   
         SELECT * From [aTConsultaBD.tareaTabla.nombreTabla/] WHERE [aTConsultaBD.tconsultabdAtributo.nombreAtributo/] = condition;
        
-INSERT INTO [aTConsultaBD.tareaTabla.nombreTabla/] ([for (aColumn : Atributo | aTConsultaBD.tareaTabla.atributos) separator (', ')][aColumn.nombreAtributo/][/for])
-VALUES (value1, value2, ...);
-        DELETE FROM [aTConsultaBD.tareaTabla.nombreTabla/] WHERE [aTConsultaBD.tconsultabdAtributo.nombreAtributo/] = condition;
    
 
 </body>
