@@ -119,13 +119,8 @@
     </header>
 
     <main>
-		[if (aTEnviar.tareaSiguiente <> null)]
-			<form action="[aTEnviar.tareaSiguiente.eClass().name/]_[aTEnviar.tareaSiguiente.nombreTarea/]_[aTEnviar.tareaSiguiente.tareaActor.nombreActor/].html" method="GET">
-                
-		[else]
 			<form action="index.html" method="GET">
                     
-		[/if]
             
             <label for="textarea">Textarea:</label><br>
             <textarea id="textarea" name="textarea"></textarea><br>
